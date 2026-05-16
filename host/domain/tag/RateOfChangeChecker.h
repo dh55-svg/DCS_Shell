@@ -1,42 +1,31 @@
-#ifndef RATEOFCHANGECHECKER_H
-#define RATEOFCHANGECHECKER_H
-#include <deque>
-#include <cmath>
-#include <cstdint>
+#pragma once
+#include <QHash>
+#include <QDateTime>
+#include "TagInfo.h"
 
-struct RocSample {
-    float value;
-    int64_t timestampMs;
+struct RateOfChangeData {
+    float lastValue = 0.0f;
+    qint64 lastTime = 0;
 };
 
 class RateOfChangeChecker {
 public:
-    RateOfChangeChecker(float limitPerSec, int windowMs)
-        : m_limitPerSec(limitPerSec), m_windowMs(windowMs) {}
-
-    void addSample(float value, int64_t timestampMs) {
-        m_samples.push_back({value, timestampMs});
-        prune(timestampMs);
-    }
-
-    bool isExceeded() const {
-        if (m_samples.size() < 2) return false;
-        float dv = std::abs(m_samples.back().value - m_samples.front().value);
-        float dt = (m_samples.back().timestampMs - m_samples.front().timestampMs) / 1000.0f;
+    bool exceedsLimit(quint32 tagId, float currentValue, const TagInf& cfg) {
+        auto& d = m_data[tagId];
+        qint64 now = QDateTime::currentMSecsSinceEpoch();
+        if (d.lastValue == 0 || d.lastTime <= 0) {
+            d.lastValue = currentValue;
+            d.lastTime = now;
+            return false;
+        }
+        float dt = (now - d.lastTime) / 1000.0f;
         if (dt <= 0.0f) return false;
-        return (dv / dt) > m_limitPerSec;
+        float rate = qAbs(currentValue - d.lastValue) / dt;
+        d.lastValue = currentValue;
+        d.lastTime = now;
+        return rate > cfg.rateOfChangeLimit;
     }
-
-    void reset() { m_samples.clear(); }
-
+    void reset(quint32 tagId) { m_data.remove(tagId); }
 private:
-    void prune(int64_t nowMs) {
-        while (!m_samples.empty() && (nowMs - m_samples.front().timestampMs) > m_windowMs)
-            m_samples.pop_front();
-    }
-
-    float m_limitPerSec;
-    int m_windowMs;
-    std::deque<RocSample> m_samples;
+    QHash<quint32, RateOfChangeData> m_data;
 };
-#endif

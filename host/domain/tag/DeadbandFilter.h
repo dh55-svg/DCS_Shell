@@ -1,18 +1,27 @@
-#ifndef DEADBANDFILTER_H
-#define DEADBANDFILTER_H
-#include <cmath>
+#pragma once
+#include "../common/AlarmLimit.h"
 
-class DeadbandFilter {
-public:
-    explicit DeadbandFilter(float deadband) : m_deadband(deadband) {}
-    void update(float newValue) { m_lastValue = newValue; }
-    bool isExceeded(float newValue) const {
-        return std::abs(newValue - m_lastValue) > m_deadband;
+struct DeadbandFilter {
+    static bool exceedsDeadbaud(float value, float threshold, float deadband, AlarmLimit limit, float prevValue) {
+        switch (limit) {
+        case AlarmLimit::HighHigh:
+        case AlarmLimit::High:
+            return value > threshold + deadband || (value > threshold && prevValue <= threshold);
+        case AlarmLimit::Low:
+        case AlarmLimit::LowLow:
+            return value < threshold - deadband || (value < threshold && prevValue >= threshold);
+        default: return false;
+        }
     }
-    float lastValue() const { return m_lastValue; }
-    void reset(float value = 0.0f) { m_lastValue = value; }
-private:
-    float m_deadband;
-    float m_lastValue = 0.0f;
+    static bool returnsToNormal(float value, float threshold, float deadband, AlarmLimit limit) {
+        switch (limit) {
+        case AlarmLimit::HighHigh:
+        case AlarmLimit::High:
+            return value <= threshold - deadband;
+        case AlarmLimit::Low:
+        case AlarmLimit::LowLow:
+            return value >= threshold + deadband;
+        default: return true;
+        }
+    }
 };
-#endif

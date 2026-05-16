@@ -1,15 +1,9 @@
-#ifndef DEVIATIONCHECKER_H
-#define DEVIATIONCHECKER_H
-#include <cmath>
+#pragma once
+#include <QtMath>
+#include "TagInfo.h"
 
-class DeviationChecker {
-public:
-    explicit DeviationChecker(float limit) : m_limit(limit) {}
-    bool check(float pv, float sp) const {
-        return std::abs(pv - sp) > m_limit;
+struct DeviationChecker {
+    static bool exceedsDeviation(float pv, float sp, float deviationLimit) {
+        return qAbs(pv - sp) > deviationLimit;
     }
-    float limit() const { return m_limit; }
-private:
-    float m_limit;
 };
-#endif

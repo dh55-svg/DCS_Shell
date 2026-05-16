@@ -6,6 +6,18 @@ set(HOST_SOURCES
     domain/alarm/AlarmEngine.cpp
     domain/alarm/alarmchangelog.cpp
     domain/alarm/alarmkpimonitor.cpp
+    pipeline/DataParseThread.cpp
+    pipeline/DataPipeline.cpp
+    pipeline/HistorySampler.cpp
+    application/DataController.cpp
+    application/AlarmController.cpp
+    presentation/MainWindow.cpp
+    presentation/models/AlarmTableModel.cpp
+    presentation/models/TagDataModel.cpp
+    presentation/models/DeviceStatusModel.cpp
+    presentation/delegates/AlarmDelegate.cpp
+    presentation/delegates/StatusDelegate.cpp
+    presentation/delegates/ValueDelegate.cpp
 )
 
 add_executable(DCS_Shell ${HOST_SOURCES})
