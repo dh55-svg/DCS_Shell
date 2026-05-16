@@ -1,0 +1,48 @@
+# Build output
+build/
+out/
+
+# IDE
+.vs/
+.vscode/
+.qtcreator/
+*.user
+*.qmake.stash
+*.qtvscr
+
+# Object files
+*.o
+*.obj
+*.moc
+moc_*.cpp
+moc_*.h
+qrc_*.cpp
+
+# Libraries
+*.so
+*.so.*
+*.dylib
+*.dll
+*.lib
+*.exp
+*.pdb
+*.ilk
+
+# Qt
+Makefile
+Makefile.Debug
+Makefile.Release
+object_script.*
+
+# OS
+.DS_Store
+Thumbs.db
+
+# Logs
+logs/
+*.log
+
+# Database
+data/*.db
+data/*.db-shm
+data/*.db-wal
