@@ -75,7 +75,7 @@ T* PluginHub::resolve(const char* iid) {
             delete loader;
             continue;
         }
-        T* plugin = qobject_cast<T*>(inst);
+        T* plugin = dynamic_cast<T*>(inst);
         if (!plugin) {
             log(QString("qobject_cast failed for %1").arg(cand->filePath));
             loader->unload();
