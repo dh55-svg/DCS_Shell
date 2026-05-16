@@ -38,5 +38,11 @@ jobs:
       - name: Build
         run: cmake --build build --parallel
 
+      - name: Install Doxygen
+        run: sudo apt-get install -y doxygen graphviz
+
+      - name: Generate API docs
+        run: doxygen Doxyfile 2>&1 | tail -5
+
       - name: Test
         run: ctest --test-dir build --output-on-failure -j4

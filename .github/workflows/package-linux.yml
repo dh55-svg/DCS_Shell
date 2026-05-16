@@ -1,0 +1,71 @@
+name: Package & Deploy (Linux)
+
+on:
+  push:
+    tags:
+      - 'v*.*.*'
+    branches: [master, main]
+  workflow_dispatch:
+
+jobs:
+  package:
+    runs-on: ubuntu-22.04
+
+    steps:
+      - uses: actions/checkout@v4
+
+      - name: Install Qt
+        uses: jurplel/install-qt-action@v4
+        with:
+          version: '6.5.3'
+          host: 'linux'
+          target: 'desktop'
+          arch: 'gcc_64'
+          modules: 'qtcharts qtserialport'
+
+      - name: Install system deps
+        run: |
+          sudo apt-get update
+          sudo apt-get install -y libgl1-mesa-dev libxkbcommon-x11-0
+          sudo apt-get install -y libmodbus-dev qt6-mqtt-dev
+          sudo apt-get install -y doxygen graphviz
+
+      - name: Configure (Release)
+        run: >
+          cmake -S ${{ github.workspace }} -B build_rel
+          -DCMAKE_BUILD_TYPE=Release
+          -DBUILD_TESTS=OFF
+          -DBUILD_PLUGINS=ON
+
+      - name: Build
+        run: cmake --build build_rel --parallel
+
+      - name: Run Doxygen
+        run: doxygen Doxyfile
+
+      - name: Deploy Qt dependencies
+        run: |
+          mkdir -p build_rel/host/plugins build_rel/host/config build_rel/host/docs
+          cp build_rel/plugins/*.so build_rel/host/plugins/ 2>/dev/null || true
+          cp build_rel/plugins/*.json build_rel/host/plugins/ 2>/dev/null || true
+          cp -r config/* build_rel/host/config/
+          cp -r docs/* build_rel/host/docs/
+
+      - name: Upload artifact
+        uses: actions/upload-artifact@v4
+        with:
+          name: DCS_Shell_Linux_x64
+          path: |
+            build_rel/host/
+            docs/api/
+          retention-days: 30
+
+      - name: Create Release (tagged only)
+        if: startsWith(github.ref, 'refs/tags/v')
+        uses: softprops/action-gh-release@v2
+        with:
+          files: |
+            build_rel/host/DCS_Shell
+            build_rel/plugins/*.so
+            docs/api/
+          generate_release_notes: true

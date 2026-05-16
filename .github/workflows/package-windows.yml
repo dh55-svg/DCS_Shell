@@ -1,0 +1,100 @@
+name: Package & Deploy (Windows)
+
+on:
+  push:
+    tags:
+      - 'v*.*.*'
+    branches: [master, main]
+  workflow_dispatch:
+    inputs:
+      environment:
+        description: 'Deployment environment'
+        required: true
+        default: 'staging'
+        type: choice
+        options:
+          - staging
+          - production
+
+jobs:
+  package:
+    runs-on: windows-latest
+
+    steps:
+      - uses: actions/checkout@v4
+
+      - name: Install Qt
+        uses: jurplel/install-qt-action@v4
+        with:
+          version: '6.5.3'
+          host: 'windows'
+          target: 'desktop'
+          arch: 'win64_msvc2019_64'
+          modules: 'qtcharts qtserialport'
+
+      - name: Install Doxygen
+        run: choco install doxygen.install --no-progress
+
+      - name: Configure (Release)
+        run: >
+          cmake -S ${{ github.workspace }} -B build_rel
+          -DCMAKE_BUILD_TYPE=Release
+          -DBUILD_TESTS=OFF
+          -DBUILD_PLUGINS=ON
+
+      - name: Build
+        run: cmake --build build_rel --parallel
+
+      - name: Run Doxygen
+        run: doxygen Doxyfile
+
+      - name: Deploy Qt dependencies
+        run: >
+          windeployqt --qmldir host/presentation build_rel/host/DCS_Shell.exe
+
+      - name: Copy plugins
+        shell: cmd
+        run: |
+          mkdir build_rel\host\plugins
+          copy build_rel\plugins\*.dll build_rel\host\plugins\
+          copy build_rel\plugins\*.json build_rel\host\plugins\
+
+      - name: Copy config
+        shell: cmd
+        run: xcopy /E config build_rel\host\config\
+
+      # ── Code Signing (enabled on tagged releases) ──
+      - name: Import code signing certificate
+        if: startsWith(github.ref, 'refs/tags/v')
+        shell: pwsh
+        run: |
+          $certBytes = [Convert]::FromBase64String("${{ secrets.CODE_SIGN_CERT_BASE64 }}")
+          [System.IO.File]::WriteAllBytes("${{ runner.temp }}\codesign.pfx", $certBytes)
+
+      - name: Sign binaries
+        if: startsWith(github.ref, 'refs/tags/v')
+        shell: cmd
+        run: |
+          signtool sign /fd SHA256 /f "${{ runner.temp }}\codesign.pfx" /p "${{ secrets.CODE_SIGN_PASSWORD }}" /tr http://timestamp.digicert.com /td SHA256 build_rel\host\Release\DCS_Shell.exe build_rel\plugins\*.dll
+
+      - name: Upload artifact
+        uses: actions/upload-artifact@v4
+        with:
+          name: DCS_Shell_Windows_x64
+          path: |
+            build_rel/host/
+            build_rel/plugins/*.dll
+            build_rel/plugins/*.json
+            config/
+            docs/api/
+          retention-days: 30
+
+      - name: Create Release (tagged only)
+        if: startsWith(github.ref, 'refs/tags/v')
+        uses: softprops/action-gh-release@v2
+        with:
+          files: |
+            build_rel/host/DCS_Shell.exe
+            build_rel/plugins/*.dll
+            docs/api/
+          generate_release_notes: true

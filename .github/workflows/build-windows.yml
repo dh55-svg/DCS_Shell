@@ -39,6 +39,12 @@ jobs:
       - name: Build
         run: cmake --build build --parallel
 
+      - name: Install Doxygen
+        run: choco install doxygen.install --no-progress || true
+
+      - name: Generate API docs
+        run: doxygen Doxyfile 2>&1
+
       - name: Test
         run: ctest --test-dir build --output-on-failure -j4
 
