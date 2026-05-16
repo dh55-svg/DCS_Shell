@@ -54,5 +54,5 @@ private slots:
     }
 };
 
-QTEST_MAIN(TestDoubleBuffer)
+QTEST_APPLESS_MAIN(TestDoubleBuffer)
 #include "test_double_buffer.moc"

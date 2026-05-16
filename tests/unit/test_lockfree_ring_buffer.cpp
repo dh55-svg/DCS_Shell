@@ -53,5 +53,5 @@ private slots:
     }
 };
 
-QTEST_MAIN(TestLockFreeRingBuffer)
+QTEST_APPLESS_MAIN(TestLockFreeRingBuffer)
 #include "test_lockfree_ring_buffer.moc"

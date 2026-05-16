@@ -1,0 +1,240 @@
+{
+	"AUTOGEN_COMMAND_LINE_LENGTH_MAX" : 32000,
+	"BUILD_DIR" : "C:/Users/dhdwy/Documents/DCS_Shell/build_rel/host/DCS_Shell_autogen",
+	"CMAKE_BINARY_DIR" : "C:/Users/dhdwy/Documents/DCS_Shell/build_rel",
+	"CMAKE_CURRENT_BINARY_DIR" : "C:/Users/dhdwy/Documents/DCS_Shell/build_rel/host",
+	"CMAKE_CURRENT_SOURCE_DIR" : "C:/Users/dhdwy/Documents/DCS_Shell/host",
+	"CMAKE_EXECUTABLE" : "C:/Cmake/bin/cmake.exe",
+	"CMAKE_LIST_FILES" : [ "C:/Users/dhdwy/Documents/DCS_Shell/host/CMakeLists.txt" ],
+	"CMAKE_SOURCE_DIR" : "C:/Users/dhdwy/Documents/DCS_Shell",
+	"CROSS_CONFIG" : false,
+	"DEP_FILE" : "C:/Users/dhdwy/Documents/DCS_Shell/build_rel/host/DCS_Shell_autogen/deps",
+	"DEP_FILE_RULE_NAME" : "DCS_Shell_autogen/timestamp",
+	"HEADERS" : 
+	[
+		[
+			"C:/Users/dhdwy/Documents/DCS_Shell/host/application/AlarmController.h",
+			"MU",
+			"WTMXIFCN4H/moc_AlarmController.cpp",
+			null
+		],
+		[
+			"C:/Users/dhdwy/Documents/DCS_Shell/host/application/DataController.h",
+			"MU",
+			"WTMXIFCN4H/moc_DataController.cpp",
+			null
+		],
+		[
+			"C:/Users/dhdwy/Documents/DCS_Shell/host/pipeline/DataParseThread.h",
+			"MU",
+			"Z6JCSY27BW/moc_DataParseThread.cpp",
+			null
+		],
+		[
+			"C:/Users/dhdwy/Documents/DCS_Shell/host/pipeline/DataPipeline.h",
+			"MU",
+			"Z6JCSY27BW/moc_DataPipeline.cpp",
+			null
+		],
+		[
+			"C:/Users/dhdwy/Documents/DCS_Shell/host/pipeline/HistorySampler.h",
+			"MU",
+			"Z6JCSY27BW/moc_HistorySampler.cpp",
+			null
+		],
+		[
+			"C:/Users/dhdwy/Documents/DCS_Shell/host/presentation/MainWindow.h",
+			"MU",
+			"L25KWWVNG2/moc_MainWindow.cpp",
+			null
+		],
+		[
+			"C:/Users/dhdwy/Documents/DCS_Shell/host/presentation/delegates/AlarmDelegate.h",
+			"MU",
+			"GUMHEM7E6U/moc_AlarmDelegate.cpp",
+			null
+		],
+		[
+			"C:/Users/dhdwy/Documents/DCS_Shell/host/presentation/delegates/StatusDelegate.h",
+			"MU",
+			"GUMHEM7E6U/moc_StatusDelegate.cpp",
+			null
+		],
+		[
+			"C:/Users/dhdwy/Documents/DCS_Shell/host/presentation/delegates/ValueDelegate.h",
+			"MU",
+			"GUMHEM7E6U/moc_ValueDelegate.cpp",
+			null
+		],
+		[
+			"C:/Users/dhdwy/Documents/DCS_Shell/host/presentation/models/AlarmTableModel.h",
+			"MU",
+			"TFEVOALQFD/moc_AlarmTableModel.cpp",
+			null
+		],
+		[
+			"C:/Users/dhdwy/Documents/DCS_Shell/host/presentation/models/DeviceStatusModel.h",
+			"MU",
+			"TFEVOALQFD/moc_DeviceStatusModel.cpp",
+			null
+		],
+		[
+			"C:/Users/dhdwy/Documents/DCS_Shell/host/presentation/models/TagDataModel.h",
+			"MU",
+			"TFEVOALQFD/moc_TagDataModel.cpp",
+			null
+		]
+	],
+	"HEADER_EXTENSIONS" : [ "h", "hh", "h++", "hm", "hpp", "hxx", "in", "txx" ],
+	"INCLUDE_DIR" : "C:/Users/dhdwy/Documents/DCS_Shell/build_rel/host/DCS_Shell_autogen/include",
+	"MOC_COMPILATION_FILE" : "C:/Users/dhdwy/Documents/DCS_Shell/build_rel/host/DCS_Shell_autogen/mocs_compilation.cpp",
+	"MOC_DEFINITIONS" : 
+	[
+		"QT_CORE_LIB",
+		"QT_GUI_LIB",
+		"QT_MULTIMEDIA_LIB",
+		"QT_NETWORK_LIB",
+		"QT_NO_DEBUG",
+		"QT_SQL_LIB",
+		"QT_WIDGETS_LIB",
+		"UNICODE",
+		"WIN32",
+		"WIN64",
+		"_ENABLE_EXTENDED_ALIGNED_STORAGE",
+		"_UNICODE",
+		"_WIN64"
+	],
+	"MOC_DEPEND_FILTERS" : 
+	[
+		[
+			"Q_PLUGIN_METADATA",
+			"[\n][ \t]*Q_PLUGIN_METADATA[ \t]*\\([^\\)]*FILE[ \t]*\"([^\"]+)\""
+		]
+	],
+	"MOC_INCLUDES" : 
+	[
+		"C:/Users/dhdwy/Documents/DCS_Shell/host",
+		"C:/Users/dhdwy/Documents/DCS_Shell",
+		"C:/Users/dhdwy/Documents/DCS_Shell/plugin_interface",
+		"C:/Qt/6.5.3/msvc2019_64/include/QtCore",
+		"C:/Qt/6.5.3/msvc2019_64/include",
+		"C:/Qt/6.5.3/msvc2019_64/mkspecs/win32-msvc",
+		"C:/Qt/6.5.3/msvc2019_64/include/QtSql",
+		"C:/Qt/6.5.3/msvc2019_64/include/QtNetwork",
+		"C:/Qt/6.5.3/msvc2019_64/include/QtMultimedia",
+		"C:/Qt/6.5.3/msvc2019_64/include/QtGui",
+		"C:/Qt/6.5.3/msvc2019_64/include/QtWidgets",
+		"C:/Qt/Tools/mingw1120_64/lib/gcc/x86_64-w64-mingw32/11.2.0/include/c++",
+		"C:/Qt/Tools/mingw1120_64/lib/gcc/x86_64-w64-mingw32/11.2.0/include/c++/x86_64-w64-mingw32",
+		"C:/Qt/Tools/mingw1120_64/lib/gcc/x86_64-w64-mingw32/11.2.0/include/c++/backward",
+		"C:/Qt/Tools/mingw1120_64/lib/gcc/x86_64-w64-mingw32/11.2.0/include",
+		"C:/Qt/Tools/mingw1120_64/lib/gcc/x86_64-w64-mingw32/11.2.0/include-fixed",
+		"C:/Qt/Tools/mingw1120_64/x86_64-w64-mingw32/include"
+	],
+	"MOC_MACRO_NAMES" : 
+	[
+		"Q_OBJECT",
+		"Q_GADGET",
+		"Q_NAMESPACE",
+		"Q_NAMESPACE_EXPORT",
+		"Q_GADGET_EXPORT"
+	],
+	"MOC_OPTIONS" : [],
+	"MOC_PATH_PREFIX" : false,
+	"MOC_PREDEFS_CMD" : 
+	[
+		"C:/Qt/Tools/mingw1120_64/bin/c++.exe",
+		"-std=gnu++17",
+		"-w",
+		"-dM",
+		"-E",
+		"C:/Cmake/share/cmake-3.31/Modules/CMakeCXXCompilerABI.cpp"
+	],
+	"MOC_PREDEFS_FILE" : "C:/Users/dhdwy/Documents/DCS_Shell/build_rel/host/DCS_Shell_autogen/moc_predefs.h",
+	"MOC_RELAXED_MODE" : false,
+	"MOC_SKIP" : 
+	[
+		"C:/Users/dhdwy/Documents/DCS_Shell/build_rel/host/host_core_autogen/mocs_compilation.cpp"
+	],
+	"MULTI_CONFIG" : false,
+	"PARALLEL" : 4,
+	"PARSE_CACHE_FILE" : "C:/Users/dhdwy/Documents/DCS_Shell/build_rel/host/CMakeFiles/DCS_Shell_autogen.dir/ParseCache.txt",
+	"QT_MOC_EXECUTABLE" : "C:/Qt/6.5.3/msvc2019_64/./bin/moc.exe",
+	"QT_UIC_EXECUTABLE" : "C:/Qt/6.5.3/msvc2019_64/./bin/uic.exe",
+	"QT_VERSION_MAJOR" : 6,
+	"QT_VERSION_MINOR" : 5,
+	"SETTINGS_FILE" : "C:/Users/dhdwy/Documents/DCS_Shell/build_rel/host/CMakeFiles/DCS_Shell_autogen.dir/AutogenUsed.txt",
+	"SOURCES" : 
+	[
+		[
+			"C:/Users/dhdwy/Documents/DCS_Shell/host/application/AlarmController.cpp",
+			"MU",
+			null
+		],
+		[
+			"C:/Users/dhdwy/Documents/DCS_Shell/host/application/DataController.cpp",
+			"MU",
+			null
+		],
+		[ "C:/Users/dhdwy/Documents/DCS_Shell/host/main.cpp", "MU", null ],
+		[
+			"C:/Users/dhdwy/Documents/DCS_Shell/host/pipeline/DataParseThread.cpp",
+			"MU",
+			null
+		],
+		[
+			"C:/Users/dhdwy/Documents/DCS_Shell/host/pipeline/DataPipeline.cpp",
+			"MU",
+			null
+		],
+		[
+			"C:/Users/dhdwy/Documents/DCS_Shell/host/pipeline/HistorySampler.cpp",
+			"MU",
+			null
+		],
+		[
+			"C:/Users/dhdwy/Documents/DCS_Shell/host/presentation/MainWindow.cpp",
+			"MU",
+			null
+		],
+		[
+			"C:/Users/dhdwy/Documents/DCS_Shell/host/presentation/delegates/AlarmDelegate.cpp",
+			"MU",
+			null
+		],
+		[
+			"C:/Users/dhdwy/Documents/DCS_Shell/host/presentation/delegates/StatusDelegate.cpp",
+			"MU",
+			null
+		],
+		[
+			"C:/Users/dhdwy/Documents/DCS_Shell/host/presentation/delegates/ValueDelegate.cpp",
+			"MU",
+			null
+		],
+		[
+			"C:/Users/dhdwy/Documents/DCS_Shell/host/presentation/models/AlarmTableModel.cpp",
+			"MU",
+			null
+		],
+		[
+			"C:/Users/dhdwy/Documents/DCS_Shell/host/presentation/models/DeviceStatusModel.cpp",
+			"MU",
+			null
+		],
+		[
+			"C:/Users/dhdwy/Documents/DCS_Shell/host/presentation/models/TagDataModel.cpp",
+			"MU",
+			null
+		]
+	],
+	"UIC_OPTIONS" : [],
+	"UIC_SEARCH_PATHS" : [],
+	"UIC_SKIP" : 
+	[
+		"C:/Users/dhdwy/Documents/DCS_Shell/build_rel/host/host_core_autogen/mocs_compilation.cpp"
+	],
+	"UIC_UI_FILES" : [],
+	"USE_BETTER_GRAPH" : false,
+	"VERBOSITY" : 0
+}

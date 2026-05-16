@@ -37,5 +37,5 @@ private slots:
     }
 };
 
-QTEST_MAIN(TestAppConfig)
+QTEST_APPLESS_MAIN(TestAppConfig)
 #include "test_app_config.moc"

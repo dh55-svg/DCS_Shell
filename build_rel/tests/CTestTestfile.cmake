@@ -1,0 +1,36 @@
+# CMake generated Testfile for 
+# Source directory: C:/Users/dhdwy/Documents/DCS_Shell/tests
+# Build directory: C:/Users/dhdwy/Documents/DCS_Shell/build_rel/tests
+# 
+# This file includes the relevant testing commands required for 
+# testing this directory and lists subdirectories to be tested as well.
+add_test([=[test_alarm_state_machine]=] "C:/Users/dhdwy/Documents/DCS_Shell/build_rel/tests/test_alarm_state_machine.exe")
+set_tests_properties([=[test_alarm_state_machine]=] PROPERTIES  _BACKTRACE_TRIPLES "C:/Users/dhdwy/Documents/DCS_Shell/tests/CMakeLists.txt;16;add_test;C:/Users/dhdwy/Documents/DCS_Shell/tests/CMakeLists.txt;37;add_unit_test;C:/Users/dhdwy/Documents/DCS_Shell/tests/CMakeLists.txt;0;")
+add_test([=[test_deadband_filter]=] "C:/Users/dhdwy/Documents/DCS_Shell/build_rel/tests/test_deadband_filter.exe")
+set_tests_properties([=[test_deadband_filter]=] PROPERTIES  _BACKTRACE_TRIPLES "C:/Users/dhdwy/Documents/DCS_Shell/tests/CMakeLists.txt;16;add_test;C:/Users/dhdwy/Documents/DCS_Shell/tests/CMakeLists.txt;38;add_unit_test;C:/Users/dhdwy/Documents/DCS_Shell/tests/CMakeLists.txt;0;")
+add_test([=[test_deviation_checker]=] "C:/Users/dhdwy/Documents/DCS_Shell/build_rel/tests/test_deviation_checker.exe")
+set_tests_properties([=[test_deviation_checker]=] PROPERTIES  _BACKTRACE_TRIPLES "C:/Users/dhdwy/Documents/DCS_Shell/tests/CMakeLists.txt;16;add_test;C:/Users/dhdwy/Documents/DCS_Shell/tests/CMakeLists.txt;39;add_unit_test;C:/Users/dhdwy/Documents/DCS_Shell/tests/CMakeLists.txt;0;")
+add_test([=[test_rate_of_change_checker]=] "C:/Users/dhdwy/Documents/DCS_Shell/build_rel/tests/test_rate_of_change_checker.exe")
+set_tests_properties([=[test_rate_of_change_checker]=] PROPERTIES  _BACKTRACE_TRIPLES "C:/Users/dhdwy/Documents/DCS_Shell/tests/CMakeLists.txt;16;add_test;C:/Users/dhdwy/Documents/DCS_Shell/tests/CMakeLists.txt;40;add_unit_test;C:/Users/dhdwy/Documents/DCS_Shell/tests/CMakeLists.txt;0;")
+add_test([=[test_double_buffer]=] "C:/Users/dhdwy/Documents/DCS_Shell/build_rel/tests/test_double_buffer.exe")
+set_tests_properties([=[test_double_buffer]=] PROPERTIES  _BACKTRACE_TRIPLES "C:/Users/dhdwy/Documents/DCS_Shell/tests/CMakeLists.txt;16;add_test;C:/Users/dhdwy/Documents/DCS_Shell/tests/CMakeLists.txt;41;add_unit_test;C:/Users/dhdwy/Documents/DCS_Shell/tests/CMakeLists.txt;0;")
+add_test([=[test_lockfree_ring_buffer]=] "C:/Users/dhdwy/Documents/DCS_Shell/build_rel/tests/test_lockfree_ring_buffer.exe")
+set_tests_properties([=[test_lockfree_ring_buffer]=] PROPERTIES  _BACKTRACE_TRIPLES "C:/Users/dhdwy/Documents/DCS_Shell/tests/CMakeLists.txt;16;add_test;C:/Users/dhdwy/Documents/DCS_Shell/tests/CMakeLists.txt;42;add_unit_test;C:/Users/dhdwy/Documents/DCS_Shell/tests/CMakeLists.txt;0;")
+add_test([=[test_tag_manager]=] "C:/Users/dhdwy/Documents/DCS_Shell/build_rel/tests/test_tag_manager.exe")
+set_tests_properties([=[test_tag_manager]=] PROPERTIES  _BACKTRACE_TRIPLES "C:/Users/dhdwy/Documents/DCS_Shell/tests/CMakeLists.txt;16;add_test;C:/Users/dhdwy/Documents/DCS_Shell/tests/CMakeLists.txt;43;add_unit_test;C:/Users/dhdwy/Documents/DCS_Shell/tests/CMakeLists.txt;0;")
+add_test([=[test_json_config_repo]=] "C:/Users/dhdwy/Documents/DCS_Shell/build_rel/tests/test_json_config_repo.exe")
+set_tests_properties([=[test_json_config_repo]=] PROPERTIES  _BACKTRACE_TRIPLES "C:/Users/dhdwy/Documents/DCS_Shell/tests/CMakeLists.txt;16;add_test;C:/Users/dhdwy/Documents/DCS_Shell/tests/CMakeLists.txt;44;add_unit_test;C:/Users/dhdwy/Documents/DCS_Shell/tests/CMakeLists.txt;0;")
+add_test([=[test_flood_detector]=] "C:/Users/dhdwy/Documents/DCS_Shell/build_rel/tests/test_flood_detector.exe")
+set_tests_properties([=[test_flood_detector]=] PROPERTIES  _BACKTRACE_TRIPLES "C:/Users/dhdwy/Documents/DCS_Shell/tests/CMakeLists.txt;16;add_test;C:/Users/dhdwy/Documents/DCS_Shell/tests/CMakeLists.txt;45;add_unit_test;C:/Users/dhdwy/Documents/DCS_Shell/tests/CMakeLists.txt;0;")
+add_test([=[test_chattering_guard]=] "C:/Users/dhdwy/Documents/DCS_Shell/build_rel/tests/test_chattering_guard.exe")
+set_tests_properties([=[test_chattering_guard]=] PROPERTIES  _BACKTRACE_TRIPLES "C:/Users/dhdwy/Documents/DCS_Shell/tests/CMakeLists.txt;16;add_test;C:/Users/dhdwy/Documents/DCS_Shell/tests/CMakeLists.txt;46;add_unit_test;C:/Users/dhdwy/Documents/DCS_Shell/tests/CMakeLists.txt;0;")
+add_test([=[test_shelve_manager]=] "C:/Users/dhdwy/Documents/DCS_Shell/build_rel/tests/test_shelve_manager.exe")
+set_tests_properties([=[test_shelve_manager]=] PROPERTIES  _BACKTRACE_TRIPLES "C:/Users/dhdwy/Documents/DCS_Shell/tests/CMakeLists.txt;16;add_test;C:/Users/dhdwy/Documents/DCS_Shell/tests/CMakeLists.txt;47;add_unit_test;C:/Users/dhdwy/Documents/DCS_Shell/tests/CMakeLists.txt;0;")
+add_test([=[test_app_config]=] "C:/Users/dhdwy/Documents/DCS_Shell/build_rel/tests/test_app_config.exe")
+set_tests_properties([=[test_app_config]=] PROPERTIES  _BACKTRACE_TRIPLES "C:/Users/dhdwy/Documents/DCS_Shell/tests/CMakeLists.txt;16;add_test;C:/Users/dhdwy/Documents/DCS_Shell/tests/CMakeLists.txt;48;add_unit_test;C:/Users/dhdwy/Documents/DCS_Shell/tests/CMakeLists.txt;0;")
+add_test([=[test_plugin_hub]=] "C:/Users/dhdwy/Documents/DCS_Shell/build_rel/tests/test_plugin_hub.exe")
+set_tests_properties([=[test_plugin_hub]=] PROPERTIES  _BACKTRACE_TRIPLES "C:/Users/dhdwy/Documents/DCS_Shell/tests/CMakeLists.txt;16;add_test;C:/Users/dhdwy/Documents/DCS_Shell/tests/CMakeLists.txt;49;add_unit_test;C:/Users/dhdwy/Documents/DCS_Shell/tests/CMakeLists.txt;0;")
+add_test([=[test_suppression_engine]=] "C:/Users/dhdwy/Documents/DCS_Shell/build_rel/tests/test_suppression_engine.exe")
+set_tests_properties([=[test_suppression_engine]=] PROPERTIES  _BACKTRACE_TRIPLES "C:/Users/dhdwy/Documents/DCS_Shell/tests/CMakeLists.txt;16;add_test;C:/Users/dhdwy/Documents/DCS_Shell/tests/CMakeLists.txt;50;add_unit_test;C:/Users/dhdwy/Documents/DCS_Shell/tests/CMakeLists.txt;0;")
+add_test([=[test_alarm_engine]=] "C:/Users/dhdwy/Documents/DCS_Shell/build_rel/tests/test_alarm_engine.exe")
+set_tests_properties([=[test_alarm_engine]=] PROPERTIES  _BACKTRACE_TRIPLES "C:/Users/dhdwy/Documents/DCS_Shell/tests/CMakeLists.txt;16;add_test;C:/Users/dhdwy/Documents/DCS_Shell/tests/CMakeLists.txt;51;add_unit_test;C:/Users/dhdwy/Documents/DCS_Shell/tests/CMakeLists.txt;0;")

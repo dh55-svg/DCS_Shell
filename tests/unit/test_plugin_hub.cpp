@@ -33,5 +33,5 @@ private slots:
     }
 };
 
-QTEST_MAIN(TestPluginHub)
+QTEST_APPLESS_MAIN(TestPluginHub)
 #include "test_plugin_hub.moc"

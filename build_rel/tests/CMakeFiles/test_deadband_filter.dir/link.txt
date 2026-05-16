@@ -1,0 +1,3 @@
+C:\Cmake\bin\cmake.exe -E rm -f CMakeFiles\test_deadband_filter.dir/objects.a
+C:\Qt\Tools\mingw1120_64\bin\ar.exe qc CMakeFiles\test_deadband_filter.dir/objects.a @CMakeFiles\test_deadband_filter.dir\objects1.rsp
+C:\Qt\Tools\mingw1120_64\bin\c++.exe -O3 -DNDEBUG -Wl,--whole-archive CMakeFiles\test_deadband_filter.dir/objects.a -Wl,--no-whole-archive -o test_deadband_filter.exe -Wl,--out-implib,libtest_deadband_filter.dll.a -Wl,--major-image-version,0,--minor-image-version,0 @CMakeFiles\test_deadband_filter.dir\linkLibs.rsp

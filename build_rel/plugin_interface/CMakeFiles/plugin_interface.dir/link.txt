@@ -1,0 +1,2 @@
+C:\Qt\Tools\mingw1120_64\bin\ar.exe qc libplugin_interface.a CMakeFiles/plugin_interface.dir/plugin_interface_autogen/mocs_compilation.cpp.obj CMakeFiles/plugin_interface.dir/plugin_interface.cpp.obj
+C:\Qt\Tools\mingw1120_64\bin\ranlib.exe libplugin_interface.a

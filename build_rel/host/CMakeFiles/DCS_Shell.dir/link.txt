@@ -1,0 +1,3 @@
+C:\Cmake\bin\cmake.exe -E rm -f CMakeFiles\DCS_Shell.dir/objects.a
+C:\Qt\Tools\mingw1120_64\bin\ar.exe qc CMakeFiles\DCS_Shell.dir/objects.a @CMakeFiles\DCS_Shell.dir\objects1.rsp
+C:\Qt\Tools\mingw1120_64\bin\c++.exe -O3 -DNDEBUG -Wl,--whole-archive CMakeFiles\DCS_Shell.dir/objects.a -Wl,--no-whole-archive -o DCS_Shell.exe -Wl,--out-implib,libDCS_Shell.dll.a -Wl,--major-image-version,0,--minor-image-version,0 @CMakeFiles\DCS_Shell.dir\linkLibs.rsp

@@ -40,5 +40,5 @@ private slots:
     }
 };
 
-QTEST_MAIN(TestShelveManager)
+QTEST_APPLESS_MAIN(TestShelveManager)
 #include "test_shelve_manager.moc"

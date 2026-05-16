@@ -32,5 +32,5 @@ private slots:
     }
 };
 
-QTEST_MAIN(TestFloodDetector)
+QTEST_APPLESS_MAIN(TestFloodDetector)
 #include "test_flood_detector.moc"

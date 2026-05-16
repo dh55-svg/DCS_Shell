@@ -36,5 +36,5 @@ private slots:
     }
 };
 
-QTEST_MAIN(TestJsonConfigRepo)
+QTEST_APPLESS_MAIN(TestJsonConfigRepo)
 #include "test_json_config_repo.moc"

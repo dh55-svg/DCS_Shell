@@ -23,5 +23,5 @@ private slots:
     }
 };
 
-QTEST_MAIN(TestChatteringGuard)
+QTEST_APPLESS_MAIN(TestChatteringGuard)
 #include "test_chattering_guard.moc"

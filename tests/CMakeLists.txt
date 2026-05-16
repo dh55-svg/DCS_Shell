@@ -14,6 +14,9 @@ function(add_unit_test name)
         ${CMAKE_SOURCE_DIR}
     )
     add_test(NAME ${name} COMMAND ${name})
+    set_tests_properties(${name} PROPERTIES
+        ENVIRONMENT "PATH=C:/Qt/6.5.3/mingw_64/bin;C:/Qt/Tools/mingw1120_64/bin;$ENV{PATH}"
+    )
 endfunction()
 
 function(add_integration_test name)

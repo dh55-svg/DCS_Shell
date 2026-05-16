@@ -30,5 +30,5 @@ private slots:
     }
 };
 
-QTEST_MAIN(TestDeadbandFilter)
+QTEST_APPLESS_MAIN(TestDeadbandFilter)
 #include "test_deadband_filter.moc"

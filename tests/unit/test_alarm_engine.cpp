@@ -65,5 +65,5 @@ private slots:
     }
 };
 
-QTEST_MAIN(TestAlarmEngine)
+QTEST_APPLESS_MAIN(TestAlarmEngine)
 #include "test_alarm_engine.moc"

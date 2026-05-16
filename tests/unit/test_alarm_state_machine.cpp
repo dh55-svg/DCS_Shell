@@ -48,5 +48,5 @@ private slots:
     }
 };
 
-QTEST_MAIN(TestAlarmStateMachine)
+QTEST_APPLESS_MAIN(TestAlarmStateMachine)
 #include "test_alarm_state_machine.moc"

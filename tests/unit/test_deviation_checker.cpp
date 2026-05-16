@@ -18,5 +18,5 @@ private slots:
     }
 };
 
-QTEST_MAIN(TestDeviationChecker)
+QTEST_APPLESS_MAIN(TestDeviationChecker)
 #include "test_deviation_checker.moc"

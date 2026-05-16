@@ -1,0 +1,42 @@
+file(REMOVE_RECURSE
+  "CMakeFiles/DCS_Shell_autogen.dir/AutogenUsed.txt"
+  "CMakeFiles/DCS_Shell_autogen.dir/ParseCache.txt"
+  "DCS_Shell_autogen"
+  "CMakeFiles/DCS_Shell.dir/DCS_Shell_autogen/mocs_compilation.cpp.obj"
+  "CMakeFiles/DCS_Shell.dir/DCS_Shell_autogen/mocs_compilation.cpp.obj.d"
+  "CMakeFiles/DCS_Shell.dir/application/AlarmController.cpp.obj"
+  "CMakeFiles/DCS_Shell.dir/application/AlarmController.cpp.obj.d"
+  "CMakeFiles/DCS_Shell.dir/application/DataController.cpp.obj"
+  "CMakeFiles/DCS_Shell.dir/application/DataController.cpp.obj.d"
+  "CMakeFiles/DCS_Shell.dir/main.cpp.obj"
+  "CMakeFiles/DCS_Shell.dir/main.cpp.obj.d"
+  "CMakeFiles/DCS_Shell.dir/pipeline/DataParseThread.cpp.obj"
+  "CMakeFiles/DCS_Shell.dir/pipeline/DataParseThread.cpp.obj.d"
+  "CMakeFiles/DCS_Shell.dir/pipeline/DataPipeline.cpp.obj"
+  "CMakeFiles/DCS_Shell.dir/pipeline/DataPipeline.cpp.obj.d"
+  "CMakeFiles/DCS_Shell.dir/pipeline/HistorySampler.cpp.obj"
+  "CMakeFiles/DCS_Shell.dir/pipeline/HistorySampler.cpp.obj.d"
+  "CMakeFiles/DCS_Shell.dir/presentation/MainWindow.cpp.obj"
+  "CMakeFiles/DCS_Shell.dir/presentation/MainWindow.cpp.obj.d"
+  "CMakeFiles/DCS_Shell.dir/presentation/delegates/AlarmDelegate.cpp.obj"
+  "CMakeFiles/DCS_Shell.dir/presentation/delegates/AlarmDelegate.cpp.obj.d"
+  "CMakeFiles/DCS_Shell.dir/presentation/delegates/StatusDelegate.cpp.obj"
+  "CMakeFiles/DCS_Shell.dir/presentation/delegates/StatusDelegate.cpp.obj.d"
+  "CMakeFiles/DCS_Shell.dir/presentation/delegates/ValueDelegate.cpp.obj"
+  "CMakeFiles/DCS_Shell.dir/presentation/delegates/ValueDelegate.cpp.obj.d"
+  "CMakeFiles/DCS_Shell.dir/presentation/models/AlarmTableModel.cpp.obj"
+  "CMakeFiles/DCS_Shell.dir/presentation/models/AlarmTableModel.cpp.obj.d"
+  "CMakeFiles/DCS_Shell.dir/presentation/models/DeviceStatusModel.cpp.obj"
+  "CMakeFiles/DCS_Shell.dir/presentation/models/DeviceStatusModel.cpp.obj.d"
+  "CMakeFiles/DCS_Shell.dir/presentation/models/TagDataModel.cpp.obj"
+  "CMakeFiles/DCS_Shell.dir/presentation/models/TagDataModel.cpp.obj.d"
+  "DCS_Shell.exe"
+  "DCS_Shell.exe.manifest"
+  "DCS_Shell.pdb"
+  "libDCS_Shell.dll.a"
+)
+
+# Per-language clean rules from dependency scanning.
+foreach(lang CXX)
+  include(CMakeFiles/DCS_Shell.dir/cmake_clean_${lang}.cmake OPTIONAL)
+endforeach()

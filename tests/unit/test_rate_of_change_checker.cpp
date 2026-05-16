@@ -37,5 +37,5 @@ private slots:
     }
 };
 
-QTEST_MAIN(TestRateOfChangeChecker)
+QTEST_APPLESS_MAIN(TestRateOfChangeChecker)
 #include "test_rate_of_change_checker.moc"

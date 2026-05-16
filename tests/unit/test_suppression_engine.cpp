@@ -60,5 +60,5 @@ private slots:
     }
 };
 
-QTEST_MAIN(TestSuppressionEngine)
+QTEST_APPLESS_MAIN(TestSuppressionEngine)
 #include "test_suppression_engine.moc"

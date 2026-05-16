@@ -1,0 +1,142 @@
+{
+	"AUTOGEN_COMMAND_LINE_LENGTH_MAX" : 32000,
+	"BUILD_DIR" : "C:/Users/dhdwy/Documents/DCS_Shell/build_rel/plugin_interface/plugin_interface_autogen",
+	"CMAKE_BINARY_DIR" : "C:/Users/dhdwy/Documents/DCS_Shell/build_rel",
+	"CMAKE_CURRENT_BINARY_DIR" : "C:/Users/dhdwy/Documents/DCS_Shell/build_rel/plugin_interface",
+	"CMAKE_CURRENT_SOURCE_DIR" : "C:/Users/dhdwy/Documents/DCS_Shell/plugin_interface",
+	"CMAKE_EXECUTABLE" : "C:/Cmake/bin/cmake.exe",
+	"CMAKE_LIST_FILES" : [ "C:/Users/dhdwy/Documents/DCS_Shell/plugin_interface/CMakeLists.txt" ],
+	"CMAKE_SOURCE_DIR" : "C:/Users/dhdwy/Documents/DCS_Shell",
+	"CROSS_CONFIG" : false,
+	"DEP_FILE" : "C:/Users/dhdwy/Documents/DCS_Shell/build_rel/plugin_interface/plugin_interface_autogen/deps",
+	"DEP_FILE_RULE_NAME" : "plugin_interface_autogen/timestamp",
+	"HEADERS" : 
+	[
+		[
+			"C:/Users/dhdwy/Documents/DCS_Shell/plugin_interface/IAlarmRepo.h",
+			"MU",
+			"EWIEGA46WW/moc_IAlarmRepo.cpp",
+			null
+		],
+		[
+			"C:/Users/dhdwy/Documents/DCS_Shell/plugin_interface/IFieldBus.h",
+			"MU",
+			"EWIEGA46WW/moc_IFieldBus.cpp",
+			null
+		],
+		[
+			"C:/Users/dhdwy/Documents/DCS_Shell/plugin_interface/IHistoryRepo.h",
+			"MU",
+			"EWIEGA46WW/moc_IHistoryRepo.cpp",
+			null
+		],
+		[
+			"C:/Users/dhdwy/Documents/DCS_Shell/plugin_interface/IMessageBus.h",
+			"MU",
+			"EWIEGA46WW/moc_IMessageBus.cpp",
+			null
+		],
+		[
+			"C:/Users/dhdwy/Documents/DCS_Shell/plugin_interface/IMqttGateway.h",
+			"MU",
+			"EWIEGA46WW/moc_IMqttGateway.cpp",
+			null
+		],
+		[
+			"C:/Users/dhdwy/Documents/DCS_Shell/plugin_interface/IOperationRepo.h",
+			"MU",
+			"EWIEGA46WW/moc_IOperationRepo.cpp",
+			null
+		],
+		[
+			"C:/Users/dhdwy/Documents/DCS_Shell/plugin_interface/ITagRepo.h",
+			"MU",
+			"EWIEGA46WW/moc_ITagRepo.cpp",
+			null
+		],
+		[
+			"C:/Users/dhdwy/Documents/DCS_Shell/plugin_interface/PluginSdk.h",
+			"MU",
+			"EWIEGA46WW/moc_PluginSdk.cpp",
+			null
+		]
+	],
+	"HEADER_EXTENSIONS" : [ "h", "hh", "h++", "hm", "hpp", "hxx", "in", "txx" ],
+	"INCLUDE_DIR" : "C:/Users/dhdwy/Documents/DCS_Shell/build_rel/plugin_interface/plugin_interface_autogen/include",
+	"MOC_COMPILATION_FILE" : "C:/Users/dhdwy/Documents/DCS_Shell/build_rel/plugin_interface/plugin_interface_autogen/mocs_compilation.cpp",
+	"MOC_DEFINITIONS" : 
+	[
+		"QT_CORE_LIB",
+		"QT_NO_DEBUG",
+		"UNICODE",
+		"WIN32",
+		"WIN64",
+		"_ENABLE_EXTENDED_ALIGNED_STORAGE",
+		"_UNICODE",
+		"_WIN64"
+	],
+	"MOC_DEPEND_FILTERS" : 
+	[
+		[
+			"Q_PLUGIN_METADATA",
+			"[\n][ \t]*Q_PLUGIN_METADATA[ \t]*\\([^\\)]*FILE[ \t]*\"([^\"]+)\""
+		]
+	],
+	"MOC_INCLUDES" : 
+	[
+		"C:/Users/dhdwy/Documents/DCS_Shell/plugin_interface",
+		"C:/Qt/6.5.3/msvc2019_64/include/QtCore",
+		"C:/Qt/6.5.3/msvc2019_64/include",
+		"C:/Qt/6.5.3/msvc2019_64/mkspecs/win32-msvc",
+		"C:/Qt/Tools/mingw1120_64/lib/gcc/x86_64-w64-mingw32/11.2.0/include/c++",
+		"C:/Qt/Tools/mingw1120_64/lib/gcc/x86_64-w64-mingw32/11.2.0/include/c++/x86_64-w64-mingw32",
+		"C:/Qt/Tools/mingw1120_64/lib/gcc/x86_64-w64-mingw32/11.2.0/include/c++/backward",
+		"C:/Qt/Tools/mingw1120_64/lib/gcc/x86_64-w64-mingw32/11.2.0/include",
+		"C:/Qt/Tools/mingw1120_64/lib/gcc/x86_64-w64-mingw32/11.2.0/include-fixed",
+		"C:/Qt/Tools/mingw1120_64/x86_64-w64-mingw32/include"
+	],
+	"MOC_MACRO_NAMES" : 
+	[
+		"Q_OBJECT",
+		"Q_GADGET",
+		"Q_NAMESPACE",
+		"Q_NAMESPACE_EXPORT",
+		"Q_GADGET_EXPORT"
+	],
+	"MOC_OPTIONS" : [],
+	"MOC_PATH_PREFIX" : false,
+	"MOC_PREDEFS_CMD" : 
+	[
+		"C:/Qt/Tools/mingw1120_64/bin/c++.exe",
+		"-std=gnu++17",
+		"-w",
+		"-dM",
+		"-E",
+		"C:/Cmake/share/cmake-3.31/Modules/CMakeCXXCompilerABI.cpp"
+	],
+	"MOC_PREDEFS_FILE" : "C:/Users/dhdwy/Documents/DCS_Shell/build_rel/plugin_interface/plugin_interface_autogen/moc_predefs.h",
+	"MOC_RELAXED_MODE" : false,
+	"MOC_SKIP" : [],
+	"MULTI_CONFIG" : false,
+	"PARALLEL" : 4,
+	"PARSE_CACHE_FILE" : "C:/Users/dhdwy/Documents/DCS_Shell/build_rel/plugin_interface/CMakeFiles/plugin_interface_autogen.dir/ParseCache.txt",
+	"QT_MOC_EXECUTABLE" : "C:/Qt/6.5.3/msvc2019_64/./bin/moc.exe",
+	"QT_UIC_EXECUTABLE" : "C:/Qt/6.5.3/msvc2019_64/./bin/uic.exe",
+	"QT_VERSION_MAJOR" : 6,
+	"QT_VERSION_MINOR" : 5,
+	"SETTINGS_FILE" : "C:/Users/dhdwy/Documents/DCS_Shell/build_rel/plugin_interface/CMakeFiles/plugin_interface_autogen.dir/AutogenUsed.txt",
+	"SOURCES" : 
+	[
+		[
+			"C:/Users/dhdwy/Documents/DCS_Shell/plugin_interface/plugin_interface.cpp",
+			"MU",
+			null
+		]
+	],
+	"UIC_OPTIONS" : [],
+	"UIC_SEARCH_PATHS" : [],
+	"UIC_SKIP" : [],
+	"UIC_UI_FILES" : [],
+	"USE_BETTER_GRAPH" : false,
+	"VERBOSITY" : 0
+}

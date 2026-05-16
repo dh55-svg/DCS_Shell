@@ -94,5 +94,5 @@ private slots:
     }
 };
 
-QTEST_MAIN(TestTagManager)
+QTEST_APPLESS_MAIN(TestTagManager)
 #include "test_tag_manager.moc"
