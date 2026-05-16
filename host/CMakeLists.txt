@@ -27,7 +27,6 @@ target_link_libraries(host_core PUBLIC
     Qt6::Core
     Qt6::Sql
     Qt6::Network
-    Qt6::Multimedia
 )
 
 set(HOST_APP_SOURCES

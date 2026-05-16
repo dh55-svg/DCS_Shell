@@ -8,7 +8,7 @@
 #include <QMutex>
 #include <QDateTime>
 #include <QElapsedTimer>
-#include <QSoundEffect>
+// QSoundEffect disabled to avoid Qt::Multimedia dependency in host_core
 #include <memory>
 
 #include "AlarmEvent.h"
@@ -199,9 +199,10 @@ private:
     bool m_floodRecoveryPending = false;                   ///< 洪水结束后等待分批恢复
     QHash<quint32, AlarmState> m_pendingFloodRestoration;  ///< 待分批恢复的报警列表
     // ---- 声音 ----
-    QSoundEffect* m_soundCritical = nullptr;
-    QSoundEffect* m_soundMajor = nullptr;
-    QSoundEffect* m_soundMinor = nullptr;
+    // Sound disabled to avoid Qt::Multimedia dependency
+    void* m_soundCritical = nullptr;
+    void* m_soundMajor = nullptr;
+    void* m_soundMinor = nullptr;
     bool m_soundEnabled = true;
     // ---- KPI 与审计 ----
     AlarmKpiMonitor m_kpiMonitor;

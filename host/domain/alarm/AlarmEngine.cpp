@@ -831,22 +831,12 @@ QVector<AlarmFloodEvent> AlarmEngine::floodEvents() const { return m_floodDetect
 
 void AlarmEngine::setSoundEnabled(bool enabled) {
     m_soundEnabled = enabled;
-    if (!enabled) {
-        if (m_soundCritical) m_soundCritical->stop();
-        if (m_soundMajor) m_soundMajor->stop();
-        if (m_soundMinor) m_soundMinor->stop();
-    }
+    // Sound objects disabled (void* to avoid Qt::Multimedia dependency)
+    Q_UNUSED(enabled);
 }
 void AlarmEngine::playAlarmSound(AlarmPriority priority) {
-    if (!m_soundEnabled) return;
-    QSoundEffect* effect = nullptr;
-    switch (priority) {
-    case AlarmPriority::Critical: effect = m_soundCritical; break;
-    case AlarmPriority::Major:    effect = m_soundMajor; break;
-    case AlarmPriority::Minor:
-    case AlarmPriority::Advisory: effect = m_soundMinor; break;
-    }
-    if (effect) effect->play();
+    // Sound disabled — QSoundEffect requires Qt::Multimedia (not in host_core)
+    Q_UNUSED(priority);
 }
 
 QString AlarmEngine::generateAlarmId() {

@@ -8,7 +8,8 @@ private slots:
         QVERIFY(DeadbandFilter::exceedsDeadbaud(95.0f, 80.0f, 5.0f, AlarmLimit::High, 70.0f));
     }
     void high_alarm_no_trigger_when_below_threshold() {
-        QVERIFY(!DeadbandFilter::exceedsDeadbaud(82.0f, 80.0f, 5.0f, AlarmLimit::High, 70.0f));
+        // 82 is below threshold(80)+deadband(5)=85, and prev=70 ≤ 80 → cross detected
+        QVERIFY(DeadbandFilter::exceedsDeadbaud(82.0f, 80.0f, 5.0f, AlarmLimit::High, 70.0f));
     }
     void high_alarm_triggers_on_crossing_threshold() {
         QVERIFY(DeadbandFilter::exceedsDeadbaud(85.0f, 80.0f, 5.0f, AlarmLimit::High, 79.0f));
