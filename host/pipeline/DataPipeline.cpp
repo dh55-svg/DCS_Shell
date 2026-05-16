@@ -1,6 +1,7 @@
 #include "DataPipeline.h"
 #include "../domain/tag/tagmanager.h"
 #include "../domain/alarm/AlarmEngine.h"
+#include "../infrastructure/security/Security.h"
 #include <QDateTime>
 #include <QDebug>
 DataPipeline::DataPipeline(QObject *parent)
@@ -58,6 +59,16 @@ void DataPipeline::stop() {
 
 // 写设定值：工程值 → Modbus 寄存器值 → 写总线
 void DataPipeline::writeSetPoint(quint32 tagId, float value) {
+    // ── 安全检查：值域校验 ──
+    if (m_tagManager) {
+        auto tag = m_tagManager->getTag(tagId);
+        if (!Security::validateWriteValue(value, tag.engLow, tag.engHigh)) {
+            if (m_logger) m_logger->warn(QString("[SECURITY] writeSetPoint rejected: tagId=%1 value=%2 out of range [%3, %4]")
+                .arg(tagId).arg(value).arg(tag.engLow).arg(tag.engHigh));
+            return;
+        }
+    }
+
     // 写入 DoubleBuffer 供 UI 读取
     DoubleBuffer::Snapshot snap;
     snap.tagId = tagId;

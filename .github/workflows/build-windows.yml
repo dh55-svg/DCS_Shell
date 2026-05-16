@@ -1,0 +1,36 @@
+name: Build & Test (Windows)
+
+on:
+  push:
+    branches: [master, main]
+  pull_request:
+    branches: [master, main]
+
+jobs:
+  build:
+    runs-on: windows-latest
+
+    steps:
+      - uses: actions/checkout@v4
+
+      - name: Install Qt
+        uses: jurplel/install-qt-action@v4
+        with:
+          version: '6.5.3'
+          host: 'windows'
+          target: 'desktop'
+          arch: 'win64_msvc2019_64'
+          modules: 'qtcharts qtserialport'
+
+      - name: Configure
+        run: >
+          cmake -S ${{ github.workspace }} -B build
+          -DCMAKE_BUILD_TYPE=Debug
+          -DBUILD_TESTS=ON
+          -DBUILD_PLUGINS=ON
+
+      - name: Build
+        run: cmake --build build --parallel
+
+      - name: Test
+        run: ctest --test-dir build --output-on-failure -j4
