@@ -1,5 +1,6 @@
 set(HOST_SOURCES
     main.cpp
+    infrastructure/plugin/PluginHub.cpp
 )
 
 add_executable(DCS_Shell ${HOST_SOURCES})
