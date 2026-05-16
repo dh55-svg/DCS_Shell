@@ -7,7 +7,7 @@ set(CMAKE_AUTOMOC ON)
 set(CMAKE_AUTORCC ON)
 set(CMAKE_AUTOUIC ON)
 
-find_package(Qt6 REQUIRED COMPONENTS Core Widgets Sql Network SerialPort Multimedia)
+find_package(Qt6 REQUIRED COMPONENTS Core Widgets Sql Network SerialPort Multimedia Test)
 find_package(Qt6 QUIET COMPONENTS Mqtt)
 set(HAS_QT_MQTT ${Qt6Mqtt_FOUND})
 

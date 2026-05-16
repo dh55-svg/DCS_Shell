@@ -102,7 +102,7 @@ QVector<PluginDescriptor> PluginHub::discover(const char* iid) const {
         if (d.passed && d.iid == QString(iid))
             results.append(d);
     std::sort(results.begin(), results.end(),
-        [](auto& a, auto& b) { return a->priority > b->priority; });
+        [](auto& a, auto& b) { return a.priority > b.priority; });
     return results;
 }
 #endif

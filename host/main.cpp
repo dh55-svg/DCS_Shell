@@ -46,7 +46,13 @@ int main(int argc, char* argv[]) {
         .withPipeline()
         .build();
 
-    // 4. Load tags
+    // 4. Validate critical dependencies
+    if (!ctx || !ctx->tagManager || !ctx->fieldbus || !ctx->dataPipeline) {
+        qCritical() << "[FATAL] ApplicationBuilder::build() failed — missing critical dependency";
+        return 1;
+    }
+
+    // 5. Load tags
     bool tagsOk = ctx->tagManager->loadFromJson(configDir + "/tags.json");
     qDebug() << "[main] tags:" << (tagsOk ? "OK" : "FAIL") << "count:" << ctx->tagManager->tagCount();
 
