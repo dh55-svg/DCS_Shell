@@ -63,8 +63,11 @@ void DataPipeline::writeSetPoint(quint32 tagId, float value) {
     if (m_tagManager) {
         auto tag = m_tagManager->getTag(tagId);
         if (!Security::validateWriteValue(value, tag.engLow, tag.engHigh)) {
-            if (m_logger) m_logger->warn(QString("[SECURITY] writeSetPoint rejected: tagId=%1 value=%2 out of range [%3, %4]")
-                .arg(tagId).arg(value).arg(tag.engLow).arg(tag.engHigh));
+            QString reason = QString("value %1 out of range [%2, %3]")
+                .arg(value).arg(tag.engLow).arg(tag.engHigh);
+            if (m_logger) m_logger->warn(QString("[SECURITY] writeSetPoint rejected: tagId=%1 %2")
+                .arg(tagId).arg(reason));
+            emit writeRejected(tagId, value, reason);
             return;
         }
     }
@@ -109,6 +112,17 @@ void DataPipeline::setAutoMode(quint32 tagId, bool autoMode) {
         if (autoMode && m_fieldbus) {
             auto snap = m_doubleBuffer.readTag(tagId);
             float sp = snap.setPoint;
+
+            // ── 安全检查：值域校验 ──
+            if (!Security::validateWriteValue(sp, tag.engLow, tag.engHigh)) {
+                QString reason = QString("setPoint %1 out of range [%2, %3]")
+                    .arg(sp).arg(tag.engLow).arg(tag.engHigh);
+                if (m_logger) m_logger->warn(QString("[SECURITY] setAutoMode write rejected: tagId=%1 %2")
+                    .arg(tagId).arg(reason));
+                emit writeRejected(tagId, sp, reason);
+                return;
+            }
+
             float range = tag.engHigh - tag.engLow;
             if (range <= 0.0f) {
                 if (m_logger) m_logger->error(QString("[DataPipeline] setAutoMode tagId=%1 量程配置错误: engHigh=%2 engLow=%3")

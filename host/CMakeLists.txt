@@ -14,6 +14,9 @@ set(HOST_CORE_SOURCES
     domain/alarm/AlarmEngine.cpp
     domain/alarm/alarmchangelog.cpp
     domain/alarm/alarmkpimonitor.cpp
+    pipeline/DataParseThread.cpp
+    pipeline/DataPipeline.cpp
+    pipeline/HistorySampler.cpp
 )
 
 # Static library for domain + infrastructure (testable without Qt Widgets)
@@ -31,9 +34,6 @@ target_link_libraries(host_core PUBLIC
 
 set(HOST_APP_SOURCES
     main.cpp
-    pipeline/DataParseThread.cpp
-    pipeline/DataPipeline.cpp
-    pipeline/HistorySampler.cpp
     application/DataController.cpp
     application/AlarmController.cpp
     presentation/MainWindow.cpp

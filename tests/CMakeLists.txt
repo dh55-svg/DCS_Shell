@@ -52,9 +52,27 @@ add_unit_test(test_app_config unit/test_app_config.cpp)
 add_unit_test(test_plugin_hub unit/test_plugin_hub.cpp)
 add_unit_test(test_suppression_engine unit/test_suppression_engine.cpp)
 add_unit_test(test_alarm_engine unit/test_alarm_engine.cpp)
+add_unit_test(test_performance performance/test_performance.cpp)
 
-# ── Integration Tests (require MOC for mock QObject headers — WIP) ──
-# add_integration_test(test_simulator_plugin_load integration/test_simulator_plugin_load.cpp mocks/mocks_register.cpp)
-# add_integration_test(test_hot_swap integration/test_hot_swap.cpp)
-# add_integration_test(test_sqlite_persistence integration/test_sqlite_persistence.cpp)
-# add_integration_test(test_pipeline_with_simulator integration/test_pipeline_with_simulator.cpp mocks/mocks_register.cpp)
+# ── Integration Tests ──
+# AUTOMOC requires Q_OBJECT headers listed in target sources.
+# Each test includes the mock header it uses + mocks_register.cpp for MOC generation.
+add_integration_test(test_simulator_plugin_load
+    integration/test_simulator_plugin_load.cpp
+    mocks/mocks_register.cpp
+    mocks/mock_fieldbus.h
+)
+add_integration_test(test_hot_swap
+    integration/test_hot_swap.cpp
+    mocks/mocks_register.cpp
+)
+add_integration_test(test_sqlite_persistence
+    integration/test_sqlite_persistence.cpp
+    mocks/mock_alarm_repo.h
+    mocks/mock_history_repo.h
+)
+add_integration_test(test_pipeline_with_simulator
+    integration/test_pipeline_with_simulator.cpp
+    mocks/mocks_register.cpp
+    mocks/mock_fieldbus.h
+)

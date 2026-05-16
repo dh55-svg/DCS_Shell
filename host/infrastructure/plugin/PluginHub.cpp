@@ -38,6 +38,10 @@ int PluginHub::scanAll(const QString& pluginsDir) {
             QFile f(jsonPath);
             if (f.open(QIODevice::ReadOnly)) {
                 QJsonObject j = QJsonDocument::fromJson(f.readAll()).object();
+                desc.name = j.value("name").toString();
+                desc.version = j.value("version").toString();
+                desc.author = j.value("author").toString();
+                desc.compatibility = j.value("compatibility").toString();
                 desc.priority = j.value("priority").toInt(0);
             }
         }
@@ -79,6 +83,12 @@ bool PluginHub::switchPlugin(const char* iid, const QString& newPath) {
         if (item.desc.iid == iidStr) oldName = item.desc.filePath;
     }
     unloadPlugin(iid);
+
+    // ── 清理 m_discovered 中匹配此 iid 的旧条目 ──
+    m_discovered.erase(
+        std::remove_if(m_discovered.begin(), m_discovered.end(),
+            [&iidStr](const PluginDescriptor& d) { return d.iid == iidStr; }),
+        m_discovered.end());
 
     PluginDescriptor newDesc;
     newDesc.filePath = newPath;

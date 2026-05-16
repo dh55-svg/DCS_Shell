@@ -3,6 +3,7 @@
 #include <QString>
 #include <QVariantMap>
 #include "../infrastructure/config/IConfigRepo.h"
+#include "../infrastructure/security/CryptoConfig.h"
 struct AppConfig{
     QString dbBackend="mysql";
     struct MysqlConfig{
@@ -37,6 +38,10 @@ struct AppConfig{
             cfg.mysql.database = m.value("database", "dcs").toString();
             cfg.mysql.user = m.value("user", "root").toString();
             cfg.mysql.password = m.value("password", "").toString();
+            // 若为 ENC: 前缀密文则自动解密
+            if (cfg.mysql.password.startsWith("ENC:")) {
+                cfg.mysql.password = CryptoConfig::decryptPassword(cfg.mysql.password);
+            }
         }
         QVariantMap mq = map.value("mqtt").toMap();
         if (!mq.isEmpty()) {

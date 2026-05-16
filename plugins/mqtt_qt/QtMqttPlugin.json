@@ -1,1 +1,7 @@
-{"priority": 10}
+{
+  "name": "QtMqttPlugin",
+  "version": "1.0.0",
+  "author": "DCS_Shell",
+  "compatibility": ">=1.0.0",
+  "priority": 10
+}

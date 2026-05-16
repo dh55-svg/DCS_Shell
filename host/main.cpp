@@ -22,10 +22,10 @@ int main(int argc, char* argv[]) {
     QApplication app(argc, argv);
 
     // 1. PluginHub scan
-    PluginHub hub;
+    auto hub = std::make_shared<PluginHub>();
     QString pluginsDir = QApplication::applicationDirPath() + "/plugins";
     if (!QDir(pluginsDir).exists()) pluginsDir = "plugins";
-    int found = hub.scanAll(pluginsDir);
+    int found = hub->scanAll(pluginsDir);
     qDebug() << "[main] PluginHub scanned:" << found << "candidates";
 
     // 2. Load config
@@ -36,7 +36,7 @@ int main(int argc, char* argv[]) {
 
     // 3. Build dependency graph
     auto ctx = ApplicationBuilder()
-        .withPluginHub(&hub)
+        .withPluginHub(hub)
         .withConfig(appCfg)
         .withLogger()
         .withConfigRepo()

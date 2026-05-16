@@ -11,6 +11,7 @@
 #include "../pipeline/DataPipeline.h"
 #include "../infrastructure/logging/ILogger.h"
 #include "../infrastructure/config/IConfigRepo.h"
+#include "../infrastructure/plugin/PluginHub.h"
 
 struct AppContext {
     std::shared_ptr<AlarmEngine> alarmEngine;
@@ -23,5 +24,6 @@ struct AppContext {
     std::shared_ptr<IOperationRepo> operationRepo;
     std::shared_ptr<ILogger> logger;
     std::shared_ptr<IConfigRepo> configRepo;
+    std::shared_ptr<PluginHub> pluginHub;  ///< 持有 PluginHub 所有权，保证插件生命周期
 };
 #endif

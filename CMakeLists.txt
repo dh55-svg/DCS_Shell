@@ -8,8 +8,10 @@ set(CMAKE_AUTORCC ON)
 set(CMAKE_AUTOUIC ON)
 
 find_package(Qt6 REQUIRED COMPONENTS Core Widgets Sql Network SerialPort Multimedia Test)
-find_package(Qt6 QUIET COMPONENTS Mqtt)
-set(HAS_QT_MQTT ${Qt6Mqtt_FOUND})
+# find_package(Qt6 QUIET COMPONENTS Mqtt)  # disabled: local Qt6Mqtt installation broken
+# set(HAS_QT_MQTT ${Qt6Mqtt_FOUND})
+set(HAS_QT_MQTT FALSE)
+
 
 option(BUILD_TESTS "Build tests" ON)
 option(BUILD_PLUGINS "Build plugins" ON)

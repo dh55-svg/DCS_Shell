@@ -22,6 +22,13 @@ jobs:
           arch: 'win64_msvc2019_64'
           modules: 'qtcharts qtserialport'
 
+      - name: Install vcpkg dependencies
+        run: |
+          git clone https://github.com/microsoft/vcpkg.git ${{ runner.temp }}\vcpkg
+          ${{ runner.temp }}\vcpkg\bootstrap-vcpkg.bat
+          ${{ runner.temp }}\vcpkg\vcpkg install libmodbus:x64-windows
+        continue-on-error: true
+
       - name: Configure
         run: >
           cmake -S ${{ github.workspace }} -B build
@@ -34,3 +41,23 @@ jobs:
 
       - name: Test
         run: ctest --test-dir build --output-on-failure -j4
+
+      # ──────────────────────────────────────────────────
+      # Code Signing (disabled — enable when certificate is available)
+      # Required GitHub Secrets:
+      #   CODE_SIGN_CERT_BASE64  — base64-encoded .pfx certificate
+      #   CODE_SIGN_PASSWORD     — certificate password
+      # ──────────────────────────────────────────────────
+      # - name: Import code signing certificate
+      #   run: |
+      #     $certBytes = [Convert]::FromBase64String("${{ secrets.CODE_SIGN_CERT_BASE64 }}")
+      #     [System.IO.File]::WriteAllBytes("${{ runner.temp }}\codesign.pfx", $certBytes)
+      # - name: Sign binaries
+      #   run: |
+      #     signtool sign /fd SHA256 `
+      #       /f "${{ runner.temp }}\codesign.pfx" `
+      #       /p "${{ secrets.CODE_SIGN_PASSWORD }}" `
+      #       /tr http://timestamp.digicert.com `
+      #       /td SHA256 `
+      #       build\host\Release\DCS_Shell.exe `
+      #       build\plugins\*.dll

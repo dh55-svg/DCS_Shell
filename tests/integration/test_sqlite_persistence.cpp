@@ -3,6 +3,9 @@
 #include <QSqlDatabase>
 #include <QSqlQuery>
 #include "mocks/mock_history_repo.h"
+#include "mocks/mock_alarm_repo.h"
+#include "domain/alarm/AlarmEvent.h"
+#include "domain/alarm/AlarmEvent.h"
 
 class TestSqlitePersistence : public QObject {
     Q_OBJECT

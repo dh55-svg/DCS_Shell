@@ -61,6 +61,7 @@ signals:
     void alarmCleared(quint32 tagId);                                       ///< 报警清除
     void deviceStatusChanged(int deviceId, bool connected);                 ///< 设备连接状态变化
     void commStatusChanged(bool ok);                                        ///< 通信状态变化
+    void writeRejected(quint32 tagId, float value, const QString& reason); ///< 写入值域校验拒绝
 private:
     // ---- 数据管道组件（按数据流向排列）----
     RingBufMessageBus m_messageBus;    ///< 内部消息总线（含 LockFreeRingBuffer）

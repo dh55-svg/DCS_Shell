@@ -33,6 +33,9 @@ public:
     void stop();                                      ///< 停止线程（3 秒超时等待）
     DoubleBuffer* doubleBuffer() const { return m_doubleBuffer; }
 
+    /// 测试入口：直接调用 processBatch（避免启动线程）
+    void processBatchTest(const std::vector<RawModbusData>& batch) { processBatch(batch); }
+
 signals:
     void dataUpdated();                              ///< DoubleBuffer 已提交新数据
     void alarmTriggered(quint32 tagId, AlarmLimit limit, float value, float threshold); ///< 检测到报警
