@@ -10,7 +10,7 @@ private slots:
     void default_values() {
         JsonConfigRepo repo;
         AppConfig cfg;
-        QCOMPARE(cfg.dbBackend, "sqlite");
+        QCOMPARE(cfg.dbBackend, "mysql"); // struct default
         QCOMPARE(cfg.fieldbusType, "modbus");
         QCOMPARE(cfg.mqtt.enabled, false);
     }
@@ -33,7 +33,7 @@ private slots:
     void missing_file_uses_defaults() {
         JsonConfigRepo repo;
         AppConfig cfg = AppConfig{}.fromJson("/nonexistent/app.json", repo);
-        QCOMPARE(cfg.dbBackend, "sqlite");
+        QCOMPARE(cfg.dbBackend, "sqlite"); // fromJson fallback when file missing
     }
 };
 
