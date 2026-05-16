@@ -12,5 +12,15 @@
   },
   "fieldbus": "simulator",
   "configPath": "./config",
-  "mqtt": { "host": "127.0.0.1", "port": 1883, "enabled": false }
+  "mqtt": {
+    "host": "127.0.0.1",
+    "port": 1883,
+    "enabled": false,
+    "tls": {
+      "enabled": false,
+      "caCertPath": "./certs/ca.crt",
+      "clientCertPath": "./certs/client.crt",
+      "clientKeyPath": "./certs/client.key"
+    }
+  }
 }

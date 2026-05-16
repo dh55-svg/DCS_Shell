@@ -17,9 +17,13 @@ public:
     ~QtMqttPlugin() override;
 
     bool connectTo(const QString &host, quint16 port) override;
+    void connectEncrypted(const QString &host, quint16 port,
+                          const QString &caCertPath, const QString &clientCertPath,
+                          const QString &clientKeyPath) override;
     void publish(const QString &topic, const QByteArray &payload, quint8 qos) override;
     void subscribe(const QString &topic, quint8 qos) override;
     bool isOnline() const override;
+    bool isEncrypted() const override { return m_encrypted; }
     void disconnectFrom() override;
 
 private slots:
@@ -35,6 +39,7 @@ private:
     QString m_host;
     quint16 m_port = 1883;
     QHash<QString, quint8> m_subscriptions;
+    bool m_encrypted = false;
 };
 
 #endif

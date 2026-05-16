@@ -98,6 +98,7 @@ bool PluginHub::switchPlugin(const char* iid, const QString& newPath) {
     m_discovered.append(newDesc);
 
     emit pluginSwitched(iidStr, oldName, newPath);
+    if (m_auditLogger) m_auditLogger->record("operator", "switch", iidStr, QString("%1 → %2").arg(oldName, newPath));
     return true;
 }
 

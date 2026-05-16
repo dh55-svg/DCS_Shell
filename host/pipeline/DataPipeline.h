@@ -7,6 +7,7 @@
 #include "../infrastructure/messaging/LockFreeRingBuffer.h"
 #include "plugin_interface/IFieldBus.h"
 #include "../infrastructure/logging/ILogger.h"
+#include "../infrastructure/logging/AuditLogger.h"
 #include "DataParseThread.h"
 #include "HistorySampler.h"
 /**
@@ -54,7 +55,8 @@ public:
     void writeSetPoint(quint32 tagId, float value);   ///< 写设定值（工程值 → Modbus 寄存器写总线）
     void writeOutput(quint32 tagId, float value);     ///< 写输出值到 DoubleBuffer
     void setAutoMode(quint32 tagId, bool autoMode);   ///< 切换手/自动模式，手动切自动时写 SP 到总线
-    void setLogger(ILogger* logger) { m_logger = logger; }  ///< 注入日志接口
+    void setLogger(ILogger* logger) { m_logger = logger; }       ///< 注入日志接口
+    void setAuditLogger(class AuditLogger* logger) { m_auditLogger = logger; } ///< 注入审计日志
 signals:
     void dataUpdated();                                                     ///< DoubleBuffer 已提交新数据
     void alarmTriggered(quint32 tagId, AlarmLimit limit, float value, float threshold); ///< 报警触发（转发自 DataParseThread）
@@ -74,6 +76,7 @@ private:
     TagManager* m_tagManager = nullptr;   ///< 位号管理器
     AlarmEngine* m_alarmEngine = nullptr; ///< 报警引擎
     ILogger* m_logger = nullptr;          ///< 日志接口（可选，用于记录量程错误等）
+    class AuditLogger* m_auditLogger = nullptr; ///< 审计日志接口
 };
 
 #endif // DATAPIPELINE_H

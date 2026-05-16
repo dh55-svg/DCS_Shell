@@ -4,6 +4,7 @@
 #include <QVector>
 #include <QPluginLoader>
 #include "PluginDescriptor.h"
+#include "../logging/AuditLogger.h"
 
 class PluginHub : public QObject {
     Q_OBJECT
@@ -22,6 +23,7 @@ public:
     QStringList availablePlugins(const char* iid) const;
     int loadedCount() const { return m_loaded.size(); }
     void unloadAll();
+    void setAuditLogger(class AuditLogger* logger) { m_auditLogger = logger; }
 
 signals:
     void pluginLoaded(const QString& name);
@@ -39,6 +41,7 @@ private:
         QPluginLoader* loader = nullptr;
     };
     QVector<LoadedItem> m_loaded;
+    class AuditLogger* m_auditLogger = nullptr;
 };
 
 // ─── Template implementations ───

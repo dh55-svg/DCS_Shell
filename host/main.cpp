@@ -39,6 +39,7 @@ int main(int argc, char* argv[]) {
         .withPluginHub(hub)
         .withConfig(appCfg)
         .withLogger()
+        .withAuditLogger()
         .withConfigRepo()
         .withFieldbus()
         .withDatabase()

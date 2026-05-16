@@ -364,6 +364,7 @@ bool AlarmEngine::acknowledgeAlarm(const QString& alarmId, const QString& operat
             emit alarmAcknowledged(id);
             emit alarmCountChanged(activeAlarmCount(), unacknowledgedCount());
             m_alarmRepo.updateAck(id, operatorName.isEmpty() ? "operator" : operatorName, QDateTime::currentMSecsSinceEpoch());
+            if (m_auditLogger) m_auditLogger->record(operatorName.isEmpty() ? "operator" : operatorName, "ack", id, "");
             return true;
         }
     }
@@ -458,6 +459,7 @@ void AlarmEngine::shelveAlarm(quint32 tagId, const QString& reason, int duration
     lock.unlock();
     emit alarmShelved(tagId, reason, durationSec);
     emit alarmCountChanged(activeAlarmCount(), unacknowledgedCount());
+    if (m_auditLogger) m_auditLogger->record(user.isEmpty() ? "operator" : user, "shelve", QString("tagId=%1").arg(tagId), QString("%1 (%2s)").arg(reason).arg(durationSec));
 }
 void AlarmEngine::shelveAlarm(quint32 tagId, int durationMin) {
     shelveAlarm(tagId, QString("操作员屏蔽"), durationMin * 60);
@@ -478,9 +480,7 @@ void AlarmEngine::unshelveAlarm(quint32 tagId){
     lock.unlock();
     emit alarmUnshelved(tagId);
     emit alarmCountChanged(activeAlarmCount(), unacknowledgedCount());
-
-
-
+    if (m_auditLogger) m_auditLogger->record("operator", "unshelve", QString("tagId=%1").arg(tagId), "");
 }
 //获取所有搁置状态的报警列表，用于查询和显示当前被搁置的报警
 QList<AlarmEvent> AlarmEngine::shelvedAlarms() const {
@@ -503,6 +503,7 @@ void AlarmEngine::suppressByDesign(quint32 tagId, const QString& reason, const Q
     lock.unlock();
     emit alarmSuppressed(tagId, reason);
     emit alarmCountChanged(activeAlarmCount(), unacknowledgedCount());
+    if (m_auditLogger) m_auditLogger->record(user.isEmpty() ? "operator" : user, "suppress", QString("tagId=%1").arg(tagId), reason);
 }
 void AlarmEngine::suppressAlarm(quint32 tagId, const QString& reason) {
     suppressByDesign(tagId, reason, QString(), QString());
@@ -517,6 +518,7 @@ void AlarmEngine::unsuppressByDesign(quint32 tagId) {
     lock.unlock();
     emit alarmUnsuppressed(tagId);
     emit alarmCountChanged(activeAlarmCount(), unacknowledgedCount());
+    if (m_auditLogger) m_auditLogger->record("operator", "unsuppress", QString("tagId=%1").arg(tagId), "");
 }
 void AlarmEngine::unsuppressAlarm(quint32 tagId) { unsuppressByDesign(tagId); }
 

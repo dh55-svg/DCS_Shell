@@ -23,6 +23,12 @@ struct AppConfig{
         int port = 1883;
         QString clientId;
         bool enabled = false;
+        struct TlsConfig {
+            bool enabled = false;
+            QString caCertPath;
+            QString clientCertPath;
+            QString clientKeyPath;
+        } tls;
     } mqtt;
 
     QString fieldbusType = "modbus"; // "modbus", "simulator", "opcua"
@@ -49,6 +55,13 @@ struct AppConfig{
             cfg.mqtt.port = mq.value("port", 1883).toInt();
             cfg.mqtt.clientId = mq.value("clientId", "").toString();
             cfg.mqtt.enabled = mq.value("enabled", false).toBool();
+            QVariantMap tls = mq.value("tls").toMap();
+            if (!tls.isEmpty()) {
+                cfg.mqtt.tls.enabled = tls.value("enabled", false).toBool();
+                cfg.mqtt.tls.caCertPath = tls.value("caCertPath", "").toString();
+                cfg.mqtt.tls.clientCertPath = tls.value("clientCertPath", "").toString();
+                cfg.mqtt.tls.clientKeyPath = tls.value("clientKeyPath", "").toString();
+            }
         }
         cfg.fieldbusType = map.value("fieldbus", "modbus").toString();
         cfg.configBasePath = map.value("configPath", "./config").toString();

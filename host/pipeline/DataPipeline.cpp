@@ -72,6 +72,13 @@ void DataPipeline::writeSetPoint(quint32 tagId, float value) {
         }
     }
 
+    // ── 操作审计：记录写入操作 ──
+    if (m_auditLogger) {
+        m_auditLogger->record("operator", "write",
+            QString("tagId=%1").arg(tagId),
+            QString("setPoint=%1").arg(value));
+    }
+
     // 写入 DoubleBuffer 供 UI 读取
     DoubleBuffer::Snapshot snap;
     snap.tagId = tagId;
@@ -121,6 +128,13 @@ void DataPipeline::setAutoMode(quint32 tagId, bool autoMode) {
                     .arg(tagId).arg(reason));
                 emit writeRejected(tagId, sp, reason);
                 return;
+            }
+
+            // ── 操作审计：记录手/自动切换 ──
+            if (m_auditLogger) {
+                m_auditLogger->record("operator", "mode",
+                    QString("tagId=%1").arg(tagId),
+                    autoMode ? "auto" : "manual");
             }
 
             float range = tag.engHigh - tag.engLow;

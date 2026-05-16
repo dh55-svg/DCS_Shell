@@ -21,6 +21,7 @@
 #include "alarmkpimonitor.h"
 #include "plugin_interface/IAlarmRepo.h"
 #include "../../infrastructure/logging/ILogger.h"
+#include "../../infrastructure/logging/AuditLogger.h"
 
 class TagManager;
 class DoubleBuffer;
@@ -31,6 +32,7 @@ class AlarmEngine : public QObject
 public:
     AlarmEngine(IAlarmRepo& alarmRepo, TagManager* tagManager, ILogger* logger = nullptr);
     ~AlarmEngine();
+    void setAuditLogger(class AuditLogger* logger) { m_auditLogger = logger; }  ///< 注入审计日志
 
     /// 初始化：加载声音资源、启动定时器
     void initialize();
@@ -165,6 +167,7 @@ private:
     IAlarmRepo& m_alarmRepo;    ///< 报警持久化仓库
     TagManager* m_tagManager;   ///< 位号管理器（获取位号配置）
     ILogger* m_logger;          ///< 日志接口
+    class AuditLogger* m_auditLogger = nullptr;  ///< 审计日志接口
 
     // ---- 报警存储 ----
     QHash<quint32, AlarmEvent> m_activeAlarms;  ///< 活跃报警表（tagId → event）

@@ -13,6 +13,7 @@
 #include "../infrastructure/nulls/NullTagRepo.h"
 #include "../infrastructure/nulls/NullOperationRepo.h"
 #include "../infrastructure/logging/spdlogadapter.h"
+#include "../infrastructure/logging/AuditLogger.h"
 #include "../infrastructure/config/JsonConfigRepo.h"
 #include "../domain/tag/tagmanager.h"
 #include "../domain/alarm/AlarmEngine.h"
@@ -27,6 +28,8 @@ public:
     ApplicationBuilder& withPluginHub(std::shared_ptr<PluginHub> hub) {
         m_pluginHub = hub;
         m_ctx->pluginHub = hub;
+        // Audit logger is injected later via withAuditLogger → withDomain/withPipeline;
+        // PluginHub audit wired here once auditLogger is available
         return *this;
     }
 
@@ -34,6 +37,14 @@ public:
         auto logger = std::make_shared<FileLogger>();
         logger->setLogDir("./logs");
         m_ctx->logger = logger;
+        return *this;
+    }
+
+    ApplicationBuilder& withAuditLogger() {
+        m_auditLogger = std::make_shared<AuditLogger>();
+        m_auditLogger->setLogDir("./logs");
+        m_ctx->auditLogger = m_auditLogger;
+        if (m_pluginHub) m_pluginHub->setAuditLogger(m_auditLogger.get());
         return *this;
     }
 
@@ -79,6 +90,7 @@ public:
         auto* logger = m_ctx->logger.get();
         m_ctx->tagManager = std::make_shared<TagManager>(*m_ctx->tagRepo, logger);
         m_ctx->alarmEngine = std::make_shared<AlarmEngine>(*m_ctx->alarmRepo, m_ctx->tagManager.get(), logger);
+        if (m_auditLogger) m_ctx->alarmEngine->setAuditLogger(m_auditLogger.get());
         m_ctx->alarmEngine->initialize();
         return *this;
     }
@@ -90,6 +102,7 @@ public:
         m_ctx->dataPipeline->setFieldbus(m_ctx->fieldbus.get());
         m_ctx->dataPipeline->setHistoryRepo(m_ctx->historyRepo.get());
         m_ctx->dataPipeline->setLogger(m_ctx->logger.get());
+        if (m_auditLogger) m_ctx->dataPipeline->setAuditLogger(m_auditLogger.get());
         return *this;
     }
 
@@ -99,5 +112,6 @@ private:
     std::shared_ptr<AppContext> m_ctx;
     AppConfig m_cfg;
     std::shared_ptr<PluginHub> m_pluginHub;
+    std::shared_ptr<AuditLogger> m_auditLogger;
 };
 #endif

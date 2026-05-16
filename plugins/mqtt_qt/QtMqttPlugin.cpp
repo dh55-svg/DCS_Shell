@@ -3,6 +3,11 @@
 // =============================================================================
 #include "QtMqttPlugin.h"
 #include <QMqttSubscriptionProperties>
+#include <QSslConfiguration>
+#include <QSslCertificate>
+#include <QSslKey>
+#include <QSslSocket>
+#include <QFile>
 #include <QDebug>
 
 QtMqttPlugin::QtMqttPlugin(QObject *parent) : IMqttGateway() {
@@ -30,10 +35,42 @@ QtMqttPlugin::~QtMqttPlugin() { disconnectFrom(); }
 bool QtMqttPlugin::connectTo(const QString &host, quint16 port) {
     m_host = host;
     m_port = port;
+    m_encrypted = false;
     m_client->setHostname(host);
     m_client->setPort(port);
     m_client->connectToHost();
     return true;
+}
+void QtMqttPlugin::connectEncrypted(const QString &host, quint16 port,
+                                     const QString &caCertPath, const QString &clientCertPath,
+                                     const QString &clientKeyPath) {
+    m_host = host;
+    m_port = port;
+    m_encrypted = true;
+
+    QSslConfiguration sslConfig = QSslConfiguration::defaultConfiguration();
+    if (!caCertPath.isEmpty()) {
+        QList<QSslCertificate> caCerts = QSslCertificate::fromPath(caCertPath, QSsl::Pem);
+        if (!caCerts.isEmpty())
+            sslConfig.setCaCertificates(caCerts);
+    }
+    if (!clientCertPath.isEmpty() && !clientKeyPath.isEmpty()) {
+        QFile certFile(clientCertPath);
+        QFile keyFile(clientKeyPath);
+        if (certFile.open(QIODevice::ReadOnly) && keyFile.open(QIODevice::ReadOnly)) {
+            QSslCertificate clientCert(&certFile, QSsl::Pem);
+            QSslKey clientKey(&keyFile, QSsl::Rsa, QSsl::Pem);
+            sslConfig.setLocalCertificate(clientCert);
+            sslConfig.setPrivateKey(clientKey);
+            certFile.close();
+            keyFile.close();
+        }
+    }
+    sslConfig.setPeerVerifyMode(QSslSocket::VerifyPeer);
+
+    m_client->setHostname(host);
+    m_client->setPort(port);
+    m_client->connectToHostEncrypted(sslConfig);
 }
 
 void QtMqttPlugin::publish(const QString &topic, const QByteArray &payload, quint8 qos) {
