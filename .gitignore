@@ -1,6 +1,8 @@
 # Build output
 build/
 build_rel/
+build_test/
+build_test_check/
 out/
 
 # IDE
@@ -34,6 +36,12 @@ Makefile
 Makefile.Debug
 Makefile.Release
 object_script.*
+
+# Third-party sources
+3pair/
+
+# Claude Code
+.claude/
 
 # OS
 .DS_Store

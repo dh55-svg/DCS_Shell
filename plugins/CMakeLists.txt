@@ -13,6 +13,9 @@ else()
     message(STATUS "libmodbus not found — skipping ModbusPlugin")
 endif()
 
+# MySQL persistence plugin
+add_subdirectory(persistence_mysql)
+
 # MQTT plugin: requires Qt6::Mqtt
 if(Qt6Mqtt_FOUND)
     message(STATUS "Qt6::Mqtt found — building QtMqttPlugin")

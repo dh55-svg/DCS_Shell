@@ -1,0 +1,7 @@
+{
+  "name": "MysqlPersistencePlugin",
+  "version": "1.0.0",
+  "author": "DCS_Shell",
+  "compatibility": ">=1.0.0",
+  "priority": 10
+}
