@@ -34,6 +34,9 @@ function(add_integration_test name)
         ${CMAKE_SOURCE_DIR}
     )
     add_test(NAME ${name} COMMAND ${name})
+    set_tests_properties(${name} PROPERTIES
+        ENVIRONMENT "PATH=C:/Qt/6.5.3/mingw_64/bin;C:/Qt/Tools/mingw1120_64/bin;$ENV{PATH}"
+    )
 endfunction()
 
 # ── Unit Tests ──
@@ -70,6 +73,9 @@ add_integration_test(test_sqlite_persistence
     integration/test_sqlite_persistence.cpp
     mocks/mock_alarm_repo.h
     mocks/mock_history_repo.h
+)
+add_integration_test(test_mysql_persistence
+    integration/test_mysql_persistence.cpp
 )
 add_integration_test(test_pipeline_with_simulator
     integration/test_pipeline_with_simulator.cpp
