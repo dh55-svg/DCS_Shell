@@ -5,7 +5,6 @@
 #define MYSQLPERSISTENCEPLUGIN_H
 #include <QObject>
 #include <QSqlDatabase>
-#include <QSqlQuery>
 #include "plugin_interface/IAlarmRepo.h"
 #include "plugin_interface/IHistoryRepo.h"
 #include "plugin_interface/ITagRepo.h"
@@ -73,6 +72,7 @@ private:
 
     QSqlDatabase m_db;
     QString m_connName;
+    bool m_initialized = false;
 };
 
 #endif

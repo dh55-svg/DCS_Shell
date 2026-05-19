@@ -23,6 +23,10 @@ MysqlPersistencePlugin::~MysqlPersistencePlugin() {
 }
 
 void MysqlPersistencePlugin::configure(const QVariantMap& config) {
+    if (m_db.isOpen()) m_db.close();
+    if (!m_connName.isEmpty())
+        QSqlDatabase::removeDatabase(m_connName);
+
     m_connName = "dcs_mysql_" + QUuid::createUuid().toString(QUuid::Id128);
 
     m_db = QSqlDatabase::addDatabase("QMYSQL", m_connName);
@@ -37,10 +41,15 @@ void MysqlPersistencePlugin::configure(const QVariantMap& config) {
         qCritical() << "[MySQL] connection failed:" << m_db.lastError().text();
         return;
     }
+    m_initialized = true;
     initDb();
 }
 
 bool MysqlPersistencePlugin::execQuery(QSqlQuery& q) const {
+    if (!m_db.isOpen()) {
+        qWarning() << "[MySQL] database not open";
+        return false;
+    }
     if (!q.exec()) {
         qWarning() << "[MySQL] SQL error:" << q.lastError().text()
                     << "| query:" << q.lastQuery();
@@ -52,41 +61,45 @@ bool MysqlPersistencePlugin::execQuery(QSqlQuery& q) const {
 void MysqlPersistencePlugin::initDb() {
     QSqlQuery q(m_db);
 
-    q.exec("CREATE TABLE IF NOT EXISTS alarm_events ("
-           "alarm_id VARCHAR(64) PRIMARY KEY, tag_id INT NOT NULL, tag_name VARCHAR(128), "
-           "description TEXT, limit_type TINYINT DEFAULT 0, priority TINYINT DEFAULT 2, "
-           "classification TINYINT DEFAULT 0, state TINYINT DEFAULT 1, "
-           "trigger_value FLOAT DEFAULT 0, threshold_value FLOAT DEFAULT 0, "
-           "trigger_time BIGINT DEFAULT 0, acknowledged TINYINT DEFAULT 0, "
-           "ack_time BIGINT DEFAULT 0, ack_user VARCHAR(64), active TINYINT DEFAULT 1, "
-           "area VARCHAR(64), zone VARCHAR(64), "
-           "created_at TIMESTAMP DEFAULT CURRENT_TIMESTAMP, "
-           "INDEX idx_alarm_state (state, active), INDEX idx_alarm_time (trigger_time)"
-           ") ENGINE=InnoDB DEFAULT CHARSET=utf8mb4");
+    if (!q.exec("CREATE TABLE IF NOT EXISTS alarm_events ("
+                "alarm_id VARCHAR(64) PRIMARY KEY, tag_id INT NOT NULL, tag_name VARCHAR(128), "
+                "description TEXT, limit_type TINYINT DEFAULT 0, priority TINYINT DEFAULT 2, "
+                "classification TINYINT DEFAULT 0, state TINYINT DEFAULT 1, "
+                "trigger_value FLOAT DEFAULT 0, threshold_value FLOAT DEFAULT 0, "
+                "trigger_time BIGINT DEFAULT 0, acknowledged TINYINT DEFAULT 0, "
+                "ack_time BIGINT DEFAULT 0, ack_user VARCHAR(64), active TINYINT DEFAULT 1, "
+                "area VARCHAR(64), zone VARCHAR(64), "
+                "created_at TIMESTAMP DEFAULT CURRENT_TIMESTAMP, "
+                "INDEX idx_alarm_state (state, active), INDEX idx_alarm_time (trigger_time)"
+                ") ENGINE=InnoDB DEFAULT CHARSET=utf8mb4"))
+        qCritical() << "[MySQL] DDL failed (alarm_events):" << q.lastError().text();
 
-    q.exec("CREATE TABLE IF NOT EXISTS alarm_kpi_snapshots ("
-           "id BIGINT AUTO_INCREMENT PRIMARY KEY, timestamp BIGINT NOT NULL, "
-           "alarm_count_10min INT DEFAULT 0, avg_per_hour FLOAT DEFAULT 0, "
-           "peak_count_10min INT DEFAULT 0, stale_count INT DEFAULT 0, "
-           "total_active INT DEFAULT 0, shelved_count INT DEFAULT 0, "
-           "suppressed_count INT DEFAULT 0, critical_count INT DEFAULT 0, "
-           "major_count INT DEFAULT 0, minor_count INT DEFAULT 0, "
-           "advisory_count INT DEFAULT 0, avg_ack_time_sec FLOAT DEFAULT 0, "
-           "chattering_count INT DEFAULT 0, system_health_score FLOAT DEFAULT 100, "
-           "health_grade VARCHAR(2), INDEX idx_kpi_ts (timestamp)"
-           ") ENGINE=InnoDB DEFAULT CHARSET=utf8mb4");
+    if (!q.exec("CREATE TABLE IF NOT EXISTS alarm_kpi_snapshots ("
+                "id BIGINT AUTO_INCREMENT PRIMARY KEY, timestamp BIGINT NOT NULL, "
+                "alarm_count_10min INT DEFAULT 0, avg_per_hour FLOAT DEFAULT 0, "
+                "peak_count_10min INT DEFAULT 0, stale_count INT DEFAULT 0, "
+                "total_active INT DEFAULT 0, shelved_count INT DEFAULT 0, "
+                "suppressed_count INT DEFAULT 0, critical_count INT DEFAULT 0, "
+                "major_count INT DEFAULT 0, minor_count INT DEFAULT 0, "
+                "advisory_count INT DEFAULT 0, avg_ack_time_sec FLOAT DEFAULT 0, "
+                "chattering_count INT DEFAULT 0, system_health_score FLOAT DEFAULT 100, "
+                "health_grade VARCHAR(2), INDEX idx_kpi_ts (timestamp)"
+                ") ENGINE=InnoDB DEFAULT CHARSET=utf8mb4"))
+        qCritical() << "[MySQL] DDL failed (alarm_kpi_snapshots):" << q.lastError().text();
 
-    q.exec("CREATE TABLE IF NOT EXISTS history_records ("
-           "id BIGINT AUTO_INCREMENT PRIMARY KEY, tag_id INT NOT NULL, "
-           "value DOUBLE DEFAULT 0, quality INT DEFAULT 0, timestamp BIGINT NOT NULL, "
-           "INDEX idx_history_tag_time (tag_id, timestamp)"
-           ") ENGINE=InnoDB DEFAULT CHARSET=utf8mb4");
+    if (!q.exec("CREATE TABLE IF NOT EXISTS history_records ("
+                "id BIGINT AUTO_INCREMENT PRIMARY KEY, tag_id INT NOT NULL, "
+                "value DOUBLE DEFAULT 0, quality INT DEFAULT 0, timestamp BIGINT NOT NULL, "
+                "INDEX idx_history_tag_time (tag_id, timestamp)"
+                ") ENGINE=InnoDB DEFAULT CHARSET=utf8mb4"))
+        qCritical() << "[MySQL] DDL failed (history_records):" << q.lastError().text();
 
-    q.exec("CREATE TABLE IF NOT EXISTS operation_logs ("
-           "id BIGINT AUTO_INCREMENT PRIMARY KEY, user_name VARCHAR(64), "
-           "action VARCHAR(128), target VARCHAR(256), detail TEXT, timestamp BIGINT, "
-           "INDEX idx_op_time (timestamp)"
-           ") ENGINE=InnoDB DEFAULT CHARSET=utf8mb4");
+    if (!q.exec("CREATE TABLE IF NOT EXISTS operation_logs ("
+                "id BIGINT AUTO_INCREMENT PRIMARY KEY, user_name VARCHAR(64), "
+                "action VARCHAR(128), target VARCHAR(256), detail TEXT, timestamp BIGINT, "
+                "INDEX idx_op_time (timestamp)"
+                ") ENGINE=InnoDB DEFAULT CHARSET=utf8mb4"))
+        qCritical() << "[MySQL] DDL failed (operation_logs):" << q.lastError().text();
 }
 
 // ---------------------------------------------------------------------------
