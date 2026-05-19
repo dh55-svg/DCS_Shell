@@ -1,5 +1,6 @@
 #ifndef IOPERATIONREPO_H
 #define IOPERATIONREPO_H
+#include <QObject>
 #include <QVector>
 #include <QString>
 #include <QJsonObject>
@@ -13,4 +14,5 @@ public:
 };
 
 #define IOperationRepo_iid "com.dcsshell.IOperationRepo"
+Q_DECLARE_INTERFACE(IOperationRepo, IOperationRepo_iid)
 #endif

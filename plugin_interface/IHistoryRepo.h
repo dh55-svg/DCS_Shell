@@ -1,5 +1,6 @@
 #ifndef IHISTORYREPO_H
 #define IHISTORYREPO_H
+#include <QObject>
 #include <QVector>
 #include <QString>
 
@@ -19,4 +20,5 @@ public:
 };
 
 #define IHistoryRepo_iid "com.dcsshell.IHistoryRepo"
+Q_DECLARE_INTERFACE(IHistoryRepo, IHistoryRepo_iid)
 #endif

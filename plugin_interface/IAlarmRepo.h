@@ -1,5 +1,6 @@
 #ifndef IALARMREPO_H
 #define IALARMREPO_H
+#include <QObject>
 #include <QVector>
 #include <QString>
 
@@ -29,4 +30,5 @@ public:
 };
 
 #define IAlarmRepo_iid "com.dcsshell.IAlarmRepo"
+Q_DECLARE_INTERFACE(IAlarmRepo, IAlarmRepo_iid)
 #endif

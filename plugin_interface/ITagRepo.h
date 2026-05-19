@@ -1,5 +1,6 @@
 #ifndef ITAGREPO_H
 #define ITAGREPO_H
+#include <QObject>
 #include <QVector>
 #include <QString>
 
@@ -18,4 +19,5 @@ public:
 };
 
 #define ITagRepo_iid "com.dcsshell.ITagRepo"
+Q_DECLARE_INTERFACE(ITagRepo, ITagRepo_iid)
 #endif

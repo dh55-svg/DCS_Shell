@@ -1,7 +1,11 @@
+// =============================================================================
+// MysqlPersistencePlugin.h — MySQL 持久化插件 (商业标准)
+// =============================================================================
 #ifndef MYSQLPERSISTENCEPLUGIN_H
 #define MYSQLPERSISTENCEPLUGIN_H
 #include <QObject>
 #include <QSqlDatabase>
+#include <QSqlQuery>
 #include "plugin_interface/IAlarmRepo.h"
 #include "plugin_interface/IHistoryRepo.h"
 #include "plugin_interface/ITagRepo.h"
@@ -16,6 +20,7 @@ class MysqlPersistencePlugin : public QObject,
     public IConfigurable {
     Q_OBJECT
     Q_PLUGIN_METADATA(IID "com.dcsshell.MysqlPersistence" FILE "MysqlPersistencePlugin.json")
+    Q_INTERFACES(IAlarmRepo IHistoryRepo ITagRepo IOperationRepo IConfigurable)
 
 public:
     explicit MysqlPersistencePlugin(QObject* parent = nullptr);
@@ -54,12 +59,20 @@ public:
     bool saveToJson(const QString& path) const override;
 
     // IOperationRepo
-    void log(const QString& user, const QString& action, const QString& target, const QString& detail) override;
+    void log(const QString& user, const QString& action,
+             const QString& target, const QString& detail) override;
     QVector<QJsonObject> query(qint64 start, qint64 end, int limit) override;
 
 private:
     void initDb();
+    bool execQuery(QSqlQuery& q) const;
+    AlarmEvent toAlarmEvent(QSqlQuery& q) const;
+    AlarmChangeRecord toChangeRecord(QSqlQuery& q) const;
+    AlarmKpiSnapshot toKpiSnapshot(QSqlQuery& q) const;
+    TagInf toTagInf(QSqlQuery& q) const;
+
     QSqlDatabase m_db;
-    bool m_configured = false;
+    QString m_connName;
 };
+
 #endif
