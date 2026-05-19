@@ -17,6 +17,10 @@ public:
     virtual bool isEncrypted() const = 0;
     virtual void disconnectFrom() = 0;
 
+    virtual void setKeepAlive(quint16 secs) = 0;
+    virtual void setReconnectInterval(int baseMs, int maxMs) = 0;
+    virtual void setHeartbeatInterval(int secs) = 0;
+
 signals:
     void messageReceived(const QString& topic, const QByteArray& payload);
     void onlineChanged(bool online);

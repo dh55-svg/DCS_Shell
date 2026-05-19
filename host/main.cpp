@@ -45,6 +45,7 @@ int main(int argc, char* argv[]) {
         .withDatabase()
         .withDomain()
         .withPipeline()
+        .withMqtt()
         .build();
 
     // 4. Validate critical dependencies

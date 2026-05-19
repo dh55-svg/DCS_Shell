@@ -6,6 +6,7 @@
 #include "plugin_interface/IHistoryRepo.h"
 #include "plugin_interface/ITagRepo.h"
 #include "plugin_interface/IOperationRepo.h"
+#include "plugin_interface/IMqttGateway.h"
 #include "../domain/alarm/AlarmEngine.h"
 #include "../domain/tag/tagmanager.h"
 #include "../pipeline/DataPipeline.h"
@@ -27,5 +28,6 @@ struct AppContext {
     std::shared_ptr<IConfigRepo> configRepo;
     std::shared_ptr<PluginHub> pluginHub;  ///< 持有 PluginHub 所有权，保证插件生命周期
     std::shared_ptr<AuditLogger> auditLogger;  ///< 审计日志接口
+    std::shared_ptr<IMqttGateway> mqtt;  ///< MQTT 网关
 };
 #endif

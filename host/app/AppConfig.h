@@ -23,6 +23,11 @@ struct AppConfig{
         int port = 1883;
         QString clientId;
         bool enabled = false;
+        quint16 keepAlive = 60;           // MQTT 协议心跳 (秒)
+        bool cleanSession = true;
+        int reconnectBaseMs = 5000;       // 重连基础间隔 (毫秒)
+        int reconnectMaxMs  = 60000;      // 重连最大间隔 (毫秒)
+        int heartbeatInterval = 30;       // 应用层心跳周期 (秒), 0=禁用
         struct TlsConfig {
             bool enabled = false;
             QString caCertPath;
@@ -55,6 +60,11 @@ struct AppConfig{
             cfg.mqtt.port = mq.value("port", 1883).toInt();
             cfg.mqtt.clientId = mq.value("clientId", "").toString();
             cfg.mqtt.enabled = mq.value("enabled", false).toBool();
+            cfg.mqtt.keepAlive = mq.value("keepAlive", 60).toInt();
+            cfg.mqtt.cleanSession = mq.value("cleanSession", true).toBool();
+            cfg.mqtt.reconnectBaseMs = mq.value("reconnectBaseMs", 5000).toInt();
+            cfg.mqtt.reconnectMaxMs = mq.value("reconnectMaxMs", 60000).toInt();
+            cfg.mqtt.heartbeatInterval = mq.value("heartbeatInterval", 30).toInt();
             QVariantMap tls = mq.value("tls").toMap();
             if (!tls.isEmpty()) {
                 cfg.mqtt.tls.enabled = tls.value("enabled", false).toBool();

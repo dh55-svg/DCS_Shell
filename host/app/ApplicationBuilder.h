@@ -106,6 +106,32 @@ public:
         return *this;
     }
 
+    ApplicationBuilder& withMqtt() {
+        if (!m_cfg.mqtt.enabled) return *this;
+        if (m_pluginHub) {
+            IMqttGateway* gw = m_pluginHub->resolve<IMqttGateway>(IMqttGateway_iid);
+            if (gw) {
+                m_ctx->mqtt = std::shared_ptr<IMqttGateway>(m_pluginHub, gw);
+                // 应用配置
+                gw->setKeepAlive(m_cfg.mqtt.keepAlive);
+                gw->setReconnectInterval(m_cfg.mqtt.reconnectBaseMs, m_cfg.mqtt.reconnectMaxMs);
+                gw->setHeartbeatInterval(m_cfg.mqtt.heartbeatInterval);
+                // 连接
+                if (m_cfg.mqtt.tls.enabled) {
+                    gw->connectEncrypted(m_cfg.mqtt.host, m_cfg.mqtt.port,
+                                         m_cfg.mqtt.tls.caCertPath,
+                                         m_cfg.mqtt.tls.clientCertPath,
+                                         m_cfg.mqtt.tls.clientKeyPath);
+                } else {
+                    gw->connectTo(m_cfg.mqtt.host, m_cfg.mqtt.port);
+                }
+                return *this;
+            }
+        }
+        qWarning() << "[Builder] MQTT plugin not found, skipping";
+        return *this;
+    }
+
     std::shared_ptr<AppContext> build() { return m_ctx; }
 
 private:

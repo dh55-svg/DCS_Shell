@@ -16,6 +16,11 @@
     "host": "127.0.0.1",
     "port": 1883,
     "enabled": false,
+    "keepAlive": 60,
+    "cleanSession": true,
+    "reconnectBaseMs": 5000,
+    "reconnectMaxMs": 60000,
+    "heartbeatInterval": 30,
     "tls": {
       "enabled": false,
       "caCertPath": "./certs/ca.crt",
