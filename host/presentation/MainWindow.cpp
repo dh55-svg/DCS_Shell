@@ -134,7 +134,7 @@ void MainWindow::onAckClicked(int row) {
 
 void MainWindow::refreshAll() {
     // 刷新数据表
-    m_tagModel->refresh({});  // TODO: 从 DataController 获取实时数据填入
+    m_tagModel->refresh(m_dataCtrl.readRealtimeData());
     m_statusLabel->setText(QString("运行中 | 告警:%1 | 刷新:%2")
         .arg(m_alarmModel->rowCount())
         .arg(QDateTime::currentDateTime().toString("hh:mm:ss")));

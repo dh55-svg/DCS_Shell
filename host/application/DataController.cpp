@@ -25,3 +25,20 @@ void DataController::toggleAutoMode(quint32 tagId) {
     auto tag = m_tagMgr.getTag(tagId);
     m_pipeline.setAutoMode(tagId, !tag.autoMode);  ///< ★ 修复：读取当前模式并翻转
 }
+
+QVector<TagData> DataController::readRealtimeData() {
+    auto snap = m_pipeline.doubleBuffer()->readAll();
+    QVector<TagData> result;
+    result.reserve(static_cast<int>(snap->size()));
+    for (const auto& [tagId, s] : *snap) {
+        TagData td;
+        TagInf cfg = m_tagMgr.getTag(tagId);
+        td.tagName = cfg.tagName;
+        td.value = s.currentValue;
+        td.unit = cfg.unit;
+        td.quality = static_cast<int>(s.quality);
+        td.timestamp = s.timestamp;
+        result.append(td);
+    }
+    return result;
+}

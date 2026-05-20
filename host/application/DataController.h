@@ -6,6 +6,7 @@
 #include "../pipeline/DataPipeline.h"
 #include "../domain/tag/TagManager.h"
 #include "../domain/alarm/AlarmEngine.h"
+#include "../presentation/models/TagDataModel.h"
 /**
  * @file    DataController.h
  * @brief   数据控制器 — Application 层门面，封装数据管道的启动/停止和写操作
@@ -44,6 +45,7 @@ public:
     void writeSetPoint(quint32 tagId, float value);   ///< 写设定值
     void writeOutput(quint32 tagId, float value);     ///< 写输出值
     void toggleAutoMode(quint32 tagId);               ///< 切换手/自动模式
+    QVector<TagData> readRealtimeData();              ///< 读取实时数据供 UI 显示
 
 signals:
     void dataUpdated();                                        ///< 数据已更新（转发自 DataPipeline）
